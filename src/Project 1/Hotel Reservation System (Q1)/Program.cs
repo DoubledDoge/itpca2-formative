@@ -1,9 +1,10 @@
-﻿namespace Hotel_Reservation_System;
-
-class Program
+﻿namespace Hotel_Reservation_System
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello, World!");
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+        }
     }
 }
