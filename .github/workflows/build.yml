@@ -1,4 +1,4 @@
-name: Build
+name: Build job
 
 on:
   push:
@@ -19,5 +19,7 @@ jobs:
       run: dotnet msbuild -target:Restore ".\src\Project 1\Project1Solution.sln"
     - name: Build solution
       run: dotnet msbuild -property:Configuration=Release -restore:false ".\src\Project 1\Project1Solution.sln"
-    - name: Test
-      run: dotnet test .\src\Project 1\Project1Solution.sln --no-build --verbosity normal
+    - name: Test projects
+      run: |
+        dotnet build "src/Project 1/Project1Solution.sln" -c Release
+        dotnet test "src/Project 1/Project1Solution.sln" --no-build --verbosity normal
