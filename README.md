@@ -5,15 +5,15 @@ My two formative projects of C# programming spread across two semesters of my un
 *A visual representation of the project architecture (Coming Soon)*
 
 ## 📑 Table of Contents
-- [Overview](#overview)
-- [Repository Structure](#repository-structure)
-- [Project Status](#project-status)
-- [Setup Instructions](#setup-instructions)
-- [Features](#features)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
-- [Notes](#notes)
+- [Overview](#-overview)
+- [Repository Structure](#-repository-structure)
+- [Project Status](#-project-status)
+- [Setup Instructions](#-setup-instructions)
+- [Features](#-features)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Notes](#-notes)
 
 ## 🎯 Overview
 This repository contains two C# projects developed as part of a formative assessment:
