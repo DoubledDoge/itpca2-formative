@@ -30,7 +30,6 @@
                 "/Views": "${workspaceFolder}/Views",
                 "/Pages": "${workspaceFolder}/Pages"
             },
-            "output": "${workspaceFolder}/bin/Debug/netcoreapp3.1/YourProject.dll",
             "postDebugTask": "cleanup"
         }
     ]
