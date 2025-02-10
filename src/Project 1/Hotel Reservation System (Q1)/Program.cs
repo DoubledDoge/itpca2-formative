@@ -7,6 +7,9 @@
             Console.WriteLine("Hello, World!");
         }
 
+        /*  ======================
+                Helper methods
+            ======================  */
         static string GetValidStringInput(string prompt)
         {
             do
@@ -16,29 +19,28 @@
                     Console.Write($"{prompt}: ");
                     string? input = Console.ReadLine()?.Trim();
 
-                    if (string.IsNullOrWhiteSpace(input))
+                    if (string.IsNullOrWhiteSpace(input)) // if input is empty
                     {
                         Console.Write(
                             "\nError: Input cannot be empty. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
                         Console.WriteLine();
-                        continue;
                     }
-
-                    if (input.Any(char.IsDigit))
+                    else if (input.Any(char.IsDigit)) // if input contains numbers
                     {
                         Console.Write(
                             "\nError: Input should not contain numbers. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
                         Console.WriteLine();
-                        continue;
                     }
-
-                    return input;
+                    else
+                    {
+                        return input;
+                    }
                 }
-                catch (IOException ex)
+                catch (IOException ex) // if there is an error reading input
                 {
                     Console.Write(
                         $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
@@ -46,7 +48,7 @@
                     Console.ReadLine();
                     Console.WriteLine();
                 }
-                catch (OutOfMemoryException)
+                catch (OutOfMemoryException) // if input is too large
                 {
                     Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
                     Console.ReadLine();
@@ -62,57 +64,54 @@
             int? maxLength = default
         )
         {
-            do
+            while (true)
             {
                 try
                 {
                     Console.Write($"{prompt}: ");
                     string? input = Console.ReadLine()?.Trim();
 
-                    if (string.IsNullOrWhiteSpace(input))
+                    if (string.IsNullOrWhiteSpace(input)) // if input is empty
                     {
                         Console.Write(
                             "\nError: Input cannot be empty. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
                         Console.WriteLine();
-                        continue;
                     }
-
-                    if (maxLength.HasValue && input.Length > maxLength.Value)
+                    else if (maxLength.HasValue && input.Length > maxLength.Value) // if input exceeds max length
                     {
                         Console.Write(
                             $"\nError: Input must not exceed {maxLength.Value} digits. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
                         Console.WriteLine();
-                        continue;
                     }
-
-                    if (int.TryParse(input, out int result))
+                    else if (int.TryParse(input, out int result))
                     {
-                        if (result < minValue || result > maxValue)
+                        if (result < minValue || result > maxValue) // if input is out of range
                         {
                             Console.Write(
                                 $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
                             );
                             Console.ReadLine();
                             Console.WriteLine();
-                            continue;
                         }
-                        return result;
+                        else
+                        {
+                            return result;
+                        }
                     }
-                    else
+                    else // if input is not a valid integer
                     {
                         Console.Write(
                             "\nError: Please enter a valid whole number. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
                         Console.WriteLine();
-                        continue;
                     }
                 }
-                catch (IOException ex)
+                catch (IOException ex) // if there is an error reading input
                 {
                     Console.Write(
                         $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
@@ -120,13 +119,13 @@
                     Console.ReadLine();
                     Console.WriteLine();
                 }
-                catch (OutOfMemoryException)
+                catch (OutOfMemoryException) // if input is too large
                 {
                     Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
                     Console.ReadLine();
                     Console.WriteLine();
                 }
-            } while (true);
+            }
         }
     }
 }
