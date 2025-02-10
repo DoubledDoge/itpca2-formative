@@ -60,7 +60,7 @@ Key components:
 #### Project 1
 - 🏨 Hotel Reservation System
 
-  [▓░░░░░░░░░] 10%
+  [▓▓▓▓▓▓▓▓░░] 80%
 
 - 🥖 Bakery Management System
 
@@ -101,22 +101,25 @@ dotnet build Project1Solution.sln
 - Basic project structure for both systems
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
+- Hotel Reservation System features
 
 ### Planned
-- Hotel Reservation System features (Coming Soon)
+- Hotel Reservation System refinements
 - Bakery Management System features (Coming Soon)
 
 ## 🗺️ Roadmap
 ### Short-term Goals
-- Implement core business logic for both systems
-- Add unit tests
-- Enhance documentation
+- Complete both projects
+- Add unit tests?
+- Create complete documentation
 
 ### Long-term Goals
-- Add database integration
-- Implement user interface
-- Add reporting functionality
-- Begin Project 2 development
+- Add database integration???
+- Add feedback functionality (Github)
+- Begin Project 2 development (May)
+
+### Estimated completion date (Project 1)
+Probably around 03 to 10 March. There is a slight chance I may get to finish it sooner though.
 
 ## 🤝 Contributing
 1. Clone the repository
