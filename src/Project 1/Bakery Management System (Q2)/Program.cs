@@ -54,6 +54,8 @@
                     Console.ReadLine();
                     Console.WriteLine();
                 }
+
+                Console.WriteLine();
             } while (true);
         }
 
@@ -64,7 +66,7 @@
             int? maxLength = default
         )
         {
-            while (true)
+            do
             {
                 try
                 {
@@ -125,7 +127,9 @@
                     Console.ReadLine();
                     Console.WriteLine();
                 }
-            }
+
+                Console.WriteLine();
+            } while (true);
         }
     }
 }
