@@ -121,7 +121,7 @@
                 int roomTypeChoice;
                 string roomType;
 
-                /// Get room type from user
+                // Get room type from user
                 roomTypeChoice = GetValidIntInput(
                     "Enter room type to book (1: Single, 2: Double, 3: Suite)",
                     1,
@@ -168,7 +168,11 @@
                 {
                     Console.WriteLine("\nCheck-out date must be after check-in date.\n");
                 }
-            } while (checkInDate >= checkOutDate);
+                else if (checkInDate < DateTime.Today)
+                {
+                    Console.WriteLine("\nCheck-in date cannot be in the past.\n");
+                }
+            } while (checkInDate >= checkOutDate || checkInDate < DateTime.Today);
 
             // Create reservation
             var reservation = new Reservation(
