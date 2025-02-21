@@ -1,64 +1,9 @@
 ﻿namespace Hotel_Reservation_System
 {
-    class Room
-    {
-        public int RoomNumber { get; set; }
-        public string RoomType { get; set; }
-        public bool IsAvailable { get; set; }
-        public bool IsCheckedIn { get; set; }
-
-        public Room(int roomNumber, string roomType)
-        {
-            RoomNumber = roomNumber;
-            RoomType = roomType;
-            IsAvailable = true;
-            IsCheckedIn = false;
-        }
-    }
-
-    class Reservation
-    {
-        public int RoomNumber { get; set; }
-        public string GuestFullName { get; set; }
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
-
-        public Reservation(
-            int roomNumber,
-            string guestFullName,
-            DateTime checkInDate,
-            DateTime checkOutDate
-        )
-        {
-            RoomNumber = roomNumber;
-            GuestFullName = guestFullName;
-            CheckInDate = checkInDate;
-            CheckOutDate = checkOutDate;
-        }
-    }
-
     class Program
     {
-        static List<Room> rooms = new List<Room>
-        {
-            new Room(101, "Single") { IsAvailable = true },
-            new Room(102, "Single") { IsAvailable = false },
-            new Room(103, "Single") { IsAvailable = true },
-            new Room(104, "Single") { IsAvailable = false },
-            new Room(105, "Single") { IsAvailable = true },
-            new Room(201, "Double") { IsAvailable = true },
-            new Room(202, "Double") { IsAvailable = false },
-            new Room(203, "Double") { IsAvailable = true },
-            new Room(204, "Double") { IsAvailable = false },
-            new Room(205, "Double") { IsAvailable = true },
-            new Room(301, "Suite") { IsAvailable = true },
-            new Room(302, "Suite") { IsAvailable = false },
-            new Room(303, "Suite") { IsAvailable = true },
-            new Room(304, "Suite") { IsAvailable = false },
-            new Room(305, "Suite") { IsAvailable = true },
-        };
-
-        static List<Reservation> reservations = new List<Reservation>();
+        static List<Room> rooms = Room.GetRooms();
+        static List<Reservation> reservations = Reservation.GetReservations();
 
         /*  ======================
                 Main methods
@@ -66,7 +11,6 @@
 
         static bool HandleCLIMenu()
         {
-            // Display CLI Menu
             Console.WriteLine(
                 "============== Hotel Reservation System CLI Menu ==========\n\n"
                     + "1. Book Room\n"
@@ -78,11 +22,9 @@
                     + "==========================================================\n"
             );
 
-            // Get user input
             int choice = GetValidIntInput("Enter your choice (0-5)", 0, 5);
             Console.WriteLine();
 
-            // Handle user choice
             switch (choice)
             {
                 case 1:
@@ -112,7 +54,6 @@
 
         static void BookRoom()
         {
-            // Get guest full name from user
             string guestFullName = GetValidStringInput("Enter guest full name");
 
             Room roomToBook;
@@ -121,14 +62,12 @@
                 int roomTypeChoice;
                 string roomType;
 
-                // Get room type from user
                 roomTypeChoice = GetValidIntInput(
                     "Enter room type to book (1: Single, 2: Double, 3: Suite)",
                     1,
                     3
                 );
 
-                // Determine room type based on user choice
                 roomType = roomTypeChoice switch
                 {
                     1 => "Single",
@@ -144,9 +83,8 @@
                     rooms.FirstOrDefault(r => r.RoomType == roomType && r.IsAvailable)
                     ?? throw new InvalidOperationException(
                         "No available rooms of the selected type."
-                    );
+                    ); // Throw exception if no available rooms of the selected type
 
-                // Display error message if no available rooms of the selected type
                 if (roomToBook == null)
                 {
                     Console.WriteLine(
@@ -159,11 +97,9 @@
             DateTime checkOutDate;
             do
             {
-                // Get check-in and check-out dates
                 checkInDate = GetValidDateInput("Enter Check-in date");
                 checkOutDate = GetValidDateInput("Enter Check-out date");
 
-                // Check if check in date is before check out date
                 if (checkInDate >= checkOutDate)
                 {
                     Console.WriteLine("\nCheck-out date must be after check-in date.\n");
@@ -174,19 +110,16 @@
                 }
             } while (checkInDate >= checkOutDate || checkInDate < DateTime.Today);
 
-            // Create reservation
             var reservation = new Reservation(
                 roomToBook.RoomNumber,
                 guestFullName,
                 checkInDate,
                 checkOutDate
             );
-            reservations.Add(reservation); // Add reservation to list
+            reservations.Add(reservation);
 
-            // Mark room as unavailable
             roomToBook.IsAvailable = false;
 
-            // Display success message
             Console.Write(
                 $"\nRoom {roomToBook.RoomNumber} booked for {guestFullName} from {checkInDate} to {checkOutDate}.\nPress Enter to continue..."
             );
@@ -196,10 +129,7 @@
 
         static void CheckInGuest()
         {
-            // Get guest full name from user
             string guestFullName = GetValidStringInput("Enter guest full name");
-
-            // Get room number from user
             int roomNumber = GetValidIntInput("Enter room number");
 
             // Find the reservation
@@ -208,7 +138,6 @@
                 && r.RoomNumber == roomNumber
             );
 
-            // Check if reservation exists
             if (reservation == null)
             {
                 Console.Write(
@@ -218,10 +147,8 @@
                 return;
             }
 
-            // Find the room
             var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
 
-            // Check if room exists
             if (room == null)
             {
                 Console.Write($"\nRoom {roomNumber} does not exist.\nPress Enter to continue...");
@@ -229,7 +156,6 @@
                 return;
             }
 
-            // Check if the room is already checked in
             if (room.IsCheckedIn)
             {
                 Console.Write(
@@ -239,10 +165,8 @@
                 return;
             }
 
-            // Mark room as checked in
             room.IsCheckedIn = true;
 
-            // Display success message
             Console.Write(
                 $"\nGuest {guestFullName} has been checked into room {roomNumber}.\nPress Enter to continue..."
             );
@@ -251,13 +175,9 @@
 
         static void CheckOutGuest()
         {
-            // Get room number from user
             int roomNumber = GetValidIntInput("Enter room number");
+            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber); // Find the room
 
-            // Find the room
-            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
-
-            // Check if room exists
             if (room == null)
             {
                 Console.Write($"\nRoom {roomNumber} does not exist.\nPress Enter to continue...");
@@ -265,7 +185,6 @@
                 return;
             }
 
-            // Check if the room is checked in
             if (!room.IsCheckedIn)
             {
                 Console.Write(
@@ -278,17 +197,14 @@
             // Find the reservation
             var reservation = reservations.FirstOrDefault(r => r.RoomNumber == roomNumber);
 
-            // Remove the reservation if it exists
             if (reservation != null)
             {
                 reservations.Remove(reservation);
             }
 
-            // Mark room as checked out and available
             room.IsCheckedIn = false;
             room.IsAvailable = true;
 
-            // Display success message
             Console.Write(
                 $"\nRoom {roomNumber} has been checked out and is now available for new guests.\nPress Enter to continue..."
             );
@@ -329,7 +245,6 @@
 
         static void Main(string[] args)
         {
-            // Entry point of the Hotel Reservation System
             Console.WriteLine(
                 "=======================================\n"
                     + "      Welcome to GrandStay Hotel!\n"
@@ -337,13 +252,11 @@
             );
 
             bool isRunning;
-            // Main loop of the program
             do
             {
                 isRunning = HandleCLIMenu();
             } while (isRunning);
 
-            // Exit message
             Console.Write(
                 "Thank you for using GrandStay Hotel Reservation System!\nPress Enter to exit..."
             );
@@ -362,7 +275,7 @@
                     Console.Write($"{prompt}: ");
                     string? input = Console.ReadLine()?.Trim();
 
-                    if (string.IsNullOrWhiteSpace(input)) // if input is empty
+                    if (string.IsNullOrWhiteSpace(input))
                     {
                         Console.Write(
                             "\nError: Input cannot be empty. \nPress Enter to try again... "
@@ -370,7 +283,7 @@
                         Console.ReadLine();
                         Console.WriteLine();
                     }
-                    else if (input.Any(char.IsDigit)) // if input contains numbers
+                    else if (input.Any(char.IsDigit))
                     {
                         Console.Write(
                             "\nError: Input should not contain numbers. \nPress Enter to try again... "
@@ -383,7 +296,7 @@
                         return input;
                     }
                 }
-                catch (IOException ex) // if there is an error reading input
+                catch (IOException ex)
                 {
                     Console.Write(
                         $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
@@ -391,7 +304,7 @@
                     Console.ReadLine();
                     Console.WriteLine();
                 }
-                catch (OutOfMemoryException) // if input is too large
+                catch (OutOfMemoryException)
                 {
                     Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
                     Console.ReadLine();
@@ -416,7 +329,7 @@
                     Console.Write($"{prompt}: ");
                     string? input = Console.ReadLine()?.Trim();
 
-                    if (string.IsNullOrWhiteSpace(input)) // if input is empty
+                    if (string.IsNullOrWhiteSpace(input))
                     {
                         Console.Write(
                             "\nError: Input cannot be empty. \nPress Enter to try again... "
@@ -424,7 +337,7 @@
                         Console.ReadLine();
                         Console.WriteLine();
                     }
-                    else if (maxLength.HasValue && input.Length > maxLength.Value) // if input exceeds max length
+                    else if (maxLength.HasValue && input.Length > maxLength.Value)
                     {
                         Console.Write(
                             $"\nError: Input must not exceed {maxLength.Value} digits. \nPress Enter to try again... "
@@ -434,7 +347,7 @@
                     }
                     else if (int.TryParse(input, out int result))
                     {
-                        if (result < minValue || result > maxValue) // if input is out of range
+                        if (result < minValue || result > maxValue)
                         {
                             Console.Write(
                                 $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
@@ -447,7 +360,7 @@
                             return result;
                         }
                     }
-                    else // if input is not a valid integer
+                    else
                     {
                         Console.Write(
                             "\nError: Please enter a valid whole number. \nPress Enter to try again... "
@@ -456,7 +369,7 @@
                         Console.WriteLine();
                     }
                 }
-                catch (IOException ex) // if there is an error reading input
+                catch (IOException ex)
                 {
                     Console.Write(
                         $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
@@ -464,7 +377,7 @@
                     Console.ReadLine();
                     Console.WriteLine();
                 }
-                catch (OutOfMemoryException) // if input is too large
+                catch (OutOfMemoryException)
                 {
                     Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
                     Console.ReadLine();
