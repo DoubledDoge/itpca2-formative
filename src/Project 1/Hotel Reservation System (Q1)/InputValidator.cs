@@ -50,8 +50,7 @@ namespace Hotel_Reservation_System
         public static int GetValidIntInput(
             string prompt,
             int minValue = int.MinValue,
-            int maxValue = int.MaxValue,
-            int? maxLength = null
+            int maxValue = int.MaxValue
         )
         {
             do
@@ -61,16 +60,6 @@ namespace Hotel_Reservation_System
                     Console.Write($"{prompt}: ");
                     string? input = Console.ReadLine()?.Trim();
 
-                    if (maxLength.HasValue && input?.Length > maxLength)
-                    {
-                        Console.Write(
-                            $"\nError: Input length cannot exceed {maxLength} digits. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                        continue;
-                    }
-
                     if (
                         int.TryParse(input, out int result)
                         && result >= minValue
@@ -79,12 +68,14 @@ namespace Hotel_Reservation_System
                     {
                         return result;
                     }
-
-                    Console.Write(
-                        $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
-                    );
-                    Console.ReadLine();
-                    Console.WriteLine();
+                    else
+                    {
+                        Console.Write(
+                            $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
+                        );
+                        Console.ReadLine();
+                        Console.WriteLine();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -116,12 +107,14 @@ namespace Hotel_Reservation_System
                     {
                         return date;
                     }
-
-                    Console.Write(
-                        "\nError: Please enter a valid date in the format dd/mm/yyyy. \nPress Enter to try again..."
-                    );
-                    Console.ReadLine();
-                    Console.WriteLine();
+                    else
+                    {
+                        Console.Write(
+                            "\nError: Please enter a valid date in the format dd/mm/yyyy. \nPress Enter to try again..."
+                        );
+                        Console.ReadLine();
+                        Console.WriteLine();
+                    }
                 }
                 catch (Exception ex)
                 {

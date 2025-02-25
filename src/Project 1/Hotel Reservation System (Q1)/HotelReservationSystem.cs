@@ -1,6 +1,6 @@
 ﻿namespace Hotel_Reservation_System
 {
-    class Program
+    public static class HotelReservationSystem
     {
         static List<Room> rooms = Room.GetRooms();
         static List<Reservation> reservations = Reservation.GetReservations();
@@ -9,7 +9,7 @@
                 Main methods
             ======================  */
 
-        static bool HandleCLIMenu()
+        public static bool HandleCLIMenu()
         {
             Console.WriteLine(
                 "============== Hotel Reservation System CLI Menu ==========\n\n"
@@ -46,7 +46,7 @@
                     Console.WriteLine("Exiting Hotel Reservation System...\n");
                     return false;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again.\n");
+                    Console.WriteLine("How did you get that? Invalid choice. Please try again.\n");
                     break;
             }
             return true;
@@ -244,26 +244,6 @@
                 }
             }
             Console.Write("Press Enter to continue...");
-            Console.ReadLine();
-        }
-
-        static void Main(string[] args)
-        {
-            Console.WriteLine(
-                "=======================================\n"
-                    + "      Welcome to GrandStay Hotel!\n"
-                    + "=======================================\n"
-            );
-
-            bool isRunning;
-            do
-            {
-                isRunning = HandleCLIMenu();
-            } while (isRunning);
-
-            Console.Write(
-                "Thank you for using GrandStay Hotel Reservation System!\nPress Enter to exit..."
-            );
             Console.ReadLine();
         }
     }
