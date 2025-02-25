@@ -6,7 +6,6 @@ My two formative projects of C# programming spread across two semesters of my un
 
 ## 📑 Table of Contents
 - [Overview](#-overview)
-- [Repository Structure](#-repository-structure)
 - [Project Status](#-project-status)
 - [Setup Instructions](#-setup-instructions)
 - [Features](#-features)
@@ -21,38 +20,6 @@ This repository contains two C# projects developed as part of a formative assess
 2. Bakery Management System (Q2)
 
 Both projects are built using .NET 9.0 and follow modern C# development practices.
-
-## 📂 Repository Structure
-```
-📁 itpca2-formative/
-├── 📁 .github/
-│   └── 📁 workflows/
-│       └── 📄 build.yml
-├── 📁 .vscode/
-│   ├── 📄 launch.json
-│   ├── 📄 settings.json
-│   └── 📄 tasks.json
-├── 📁 docs/
-├── 📁 img/
-│   └── 📄 placeholder.png
-└── 📁 src/
-    ├── 📁 Project 1/
-    │   ├── 📁 Hotel Reservation System (Q1)/
-    │   │   ├── 📄 Program.cs
-    │   │   └── 📄 Hotel Reservation System.csproj
-    │   ├── 📁 Bakery Management System (Q2)/
-    │   │   ├── 📄 Program.cs
-    │   │   └── 📄 Bakery Management System.csproj
-    │   └── 📄 Project1Solution.sln
-    └── 📁 Project 2 (Unused)/
-```
-
-Key components:
-- `.github/workflows/`: Contains CI/CD pipeline configuration
-- `.vscode/`: VS Code editor settings and build/debug configurations
-- `src/`: Source code for both projects
-  - `Project 1/`: Contains both Q1 and Q2 solutions using .NET 9.0
-  - `Project 2/`: Reserved for future development
 
 ## 📊 Project Status
 ### Completion Progress
