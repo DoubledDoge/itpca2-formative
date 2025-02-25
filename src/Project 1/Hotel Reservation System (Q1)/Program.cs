@@ -54,7 +54,9 @@
 
         static void BookRoom()
         {
-            string guestFullName = GetValidStringInput("Enter guest full name");
+            string firstName = GetValidStringInput("Enter guest first name");
+            string lastName = GetValidStringInput("Enter guest last name");
+            Guest guest = new Guest(firstName, lastName);
 
             Room roomToBook;
             do
@@ -112,7 +114,7 @@
 
             var reservation = new Reservation(
                 roomToBook.RoomNumber,
-                guestFullName,
+                guest.FullName,
                 checkInDate,
                 checkOutDate
             );
@@ -121,7 +123,7 @@
             roomToBook.IsAvailable = false;
 
             Console.Write(
-                $"\nRoom {roomToBook.RoomNumber} booked for {guestFullName} from {checkInDate} to {checkOutDate}.\nPress Enter to continue..."
+                $"\nRoom {roomToBook.RoomNumber} booked for {guest.FullName} from {checkInDate} to {checkOutDate}.\nPress Enter to continue..."
             );
             Console.ReadLine();
             return;
@@ -129,19 +131,21 @@
 
         static void CheckInGuest()
         {
-            string guestFullName = GetValidStringInput("Enter guest full name");
+            string firstName = GetValidStringInput("Enter guest first name");
+            string lastName = GetValidStringInput("Enter guest last name");
+            Guest guest = new Guest(firstName, lastName);
             int roomNumber = GetValidIntInput("Enter room number");
 
             // Find the reservation
             var reservation = reservations.FirstOrDefault(r =>
-                string.Equals(r.GuestFullName, guestFullName, StringComparison.OrdinalIgnoreCase)
+                string.Equals(r.GuestFullName, guest.FullName, StringComparison.OrdinalIgnoreCase)
                 && r.RoomNumber == roomNumber
             );
 
             if (reservation == null)
             {
                 Console.Write(
-                    $"\nNo reservation found for {guestFullName} in room {roomNumber}.\nPress Enter to continue..."
+                    $"\nNo reservation found for {guest.FullName} in room {roomNumber}.\nPress Enter to continue..."
                 );
                 Console.ReadLine();
                 return;
@@ -159,7 +163,7 @@
             if (room.IsCheckedIn)
             {
                 Console.Write(
-                    $"\nGuest {guestFullName} is already checked into room {roomNumber}.\nPress Enter to continue..."
+                    $"\nGuest {guest.FullName} is already checked into room {roomNumber}.\nPress Enter to continue..."
                 );
                 Console.ReadLine();
                 return;
@@ -168,7 +172,7 @@
             room.IsCheckedIn = true;
 
             Console.Write(
-                $"\nGuest {guestFullName} has been checked into room {roomNumber}.\nPress Enter to continue..."
+                $"\nGuest {guest.FullName} has been checked into room {roomNumber}.\nPress Enter to continue..."
             );
             Console.ReadLine();
         }
