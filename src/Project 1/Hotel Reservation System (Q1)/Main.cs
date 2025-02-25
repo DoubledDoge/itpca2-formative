@@ -1,6 +1,6 @@
 namespace Hotel_Reservation_System
 {
-    class Startup
+    class MainClass
     {
         static void Main(string[] args)
         {
