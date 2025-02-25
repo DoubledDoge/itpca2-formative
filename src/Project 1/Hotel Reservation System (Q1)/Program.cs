@@ -22,7 +22,7 @@
                     + "==========================================================\n"
             );
 
-            int choice = GetValidIntInput("Enter your choice (0-5)", 0, 5);
+            int choice = InputValidator.GetValidIntInput("Enter your choice (0-5)", 0, 5);
             Console.WriteLine();
 
             switch (choice)
@@ -54,8 +54,8 @@
 
         static void BookRoom()
         {
-            string firstName = GetValidStringInput("Enter guest first name");
-            string lastName = GetValidStringInput("Enter guest last name");
+            string firstName = InputValidator.GetValidStringInput("Enter guest first name");
+            string lastName = InputValidator.GetValidStringInput("Enter guest last name");
             Guest guest = new Guest(firstName, lastName);
 
             Room roomToBook;
@@ -64,7 +64,7 @@
                 int roomTypeChoice;
                 string roomType;
 
-                roomTypeChoice = GetValidIntInput(
+                roomTypeChoice = InputValidator.GetValidIntInput(
                     "Enter room type to book (1: Single, 2: Double, 3: Suite)",
                     1,
                     3
@@ -99,8 +99,8 @@
             DateTime checkOutDate;
             do
             {
-                checkInDate = GetValidDateInput("Enter Check-in date");
-                checkOutDate = GetValidDateInput("Enter Check-out date");
+                checkInDate = InputValidator.GetValidDateInput("Enter Check-in date");
+                checkOutDate = InputValidator.GetValidDateInput("Enter Check-out date");
 
                 if (checkInDate >= checkOutDate)
                 {
@@ -123,7 +123,7 @@
             roomToBook.IsAvailable = false;
 
             Console.Write(
-                $"\nRoom {roomToBook.RoomNumber} booked for {guest.FullName} from {checkInDate} to {checkOutDate}.\nPress Enter to continue..."
+                $"\nRoom {roomToBook.RoomNumber} booked for {guest.FullName} from {checkInDate:dd/MM/yyyy} to {checkOutDate:dd/MM/yyyy}.\nPress Enter to continue..."
             );
             Console.ReadLine();
             return;
@@ -131,10 +131,10 @@
 
         static void CheckInGuest()
         {
-            string firstName = GetValidStringInput("Enter guest first name");
-            string lastName = GetValidStringInput("Enter guest last name");
+            string firstName = InputValidator.GetValidStringInput("Enter guest first name");
+            string lastName = InputValidator.GetValidStringInput("Enter guest last name");
             Guest guest = new Guest(firstName, lastName);
-            int roomNumber = GetValidIntInput("Enter room number");
+            int roomNumber = InputValidator.GetValidIntInput("Enter room number");
 
             // Find the reservation
             var reservation = reservations.FirstOrDefault(r =>
@@ -179,7 +179,7 @@
 
         static void CheckOutGuest()
         {
-            int roomNumber = GetValidIntInput("Enter room number");
+            int roomNumber = InputValidator.GetValidIntInput("Enter room number");
             var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber); // Find the room
 
             if (room == null)
@@ -239,7 +239,7 @@
                 foreach (var reservation in reservations)
                 {
                     Console.WriteLine(
-                        $"Room Number: {reservation.RoomNumber}, Guest: {reservation.GuestFullName}, From: {reservation.CheckInDate}, To: {reservation.CheckOutDate}"
+                        $"Room Number: {reservation.RoomNumber}, Guest: {reservation.GuestFullName}, From: {reservation.CheckInDate:dd/MM/yyyy}, To: {reservation.CheckOutDate:dd/MM/yyyy}"
                     );
                 }
             }
@@ -265,170 +265,6 @@
                 "Thank you for using GrandStay Hotel Reservation System!\nPress Enter to exit..."
             );
             Console.ReadLine();
-        }
-
-        /*  ======================
-                Helper methods
-            ======================  */
-        static string GetValidStringInput(string prompt)
-        {
-            do
-            {
-                try
-                {
-                    Console.Write($"{prompt}: ");
-                    string? input = Console.ReadLine()?.Trim();
-
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Console.Write(
-                            "\nError: Input cannot be empty. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else if (input.Any(char.IsDigit))
-                    {
-                        Console.Write(
-                            "\nError: Input should not contain numbers. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        return input;
-                    }
-                }
-                catch (IOException ex)
-                {
-                    Console.Write(
-                        $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
-                    );
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-                catch (OutOfMemoryException)
-                {
-                    Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-
-                Console.WriteLine();
-            } while (true);
-        }
-
-        static int GetValidIntInput(
-            string prompt,
-            int minValue = int.MinValue,
-            int maxValue = int.MaxValue,
-            int? maxLength = default
-        )
-        {
-            do
-            {
-                try
-                {
-                    Console.Write($"{prompt}: ");
-                    string? input = Console.ReadLine()?.Trim();
-
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Console.Write(
-                            "\nError: Input cannot be empty. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else if (maxLength.HasValue && input.Length > maxLength.Value)
-                    {
-                        Console.Write(
-                            $"\nError: Input must not exceed {maxLength.Value} digits. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else if (int.TryParse(input, out int result))
-                    {
-                        if (result < minValue || result > maxValue)
-                        {
-                            Console.Write(
-                                $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
-                            );
-                            Console.ReadLine();
-                            Console.WriteLine();
-                        }
-                        else
-                        {
-                            return result;
-                        }
-                    }
-                    else
-                    {
-                        Console.Write(
-                            "\nError: Please enter a valid whole number. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                }
-                catch (IOException ex)
-                {
-                    Console.Write(
-                        $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
-                    );
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-                catch (OutOfMemoryException)
-                {
-                    Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-
-                Console.WriteLine();
-            } while (true);
-        }
-
-        static DateTime GetValidDateInput(string prompt)
-        {
-            do
-            {
-                try
-                {
-                    Console.Write($"{prompt} (dd/mm/yyyy): ");
-                    string? input = Console.ReadLine()?.Trim();
-
-                    if (
-                        DateTime.TryParseExact(
-                            input,
-                            "dd/MM/yyyy",
-                            null,
-                            System.Globalization.DateTimeStyles.None,
-                            out DateTime date
-                        )
-                    )
-                    {
-                        return date;
-                    }
-                    else
-                    {
-                        Console.Write(
-                            "\nError: Please enter a valid date in the format dd/mm/yyyy. \nPress Enter to try again..."
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.Write($"\nError: {ex.Message}. \nPress Enter to try again...");
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-            } while (true);
         }
     }
 }
