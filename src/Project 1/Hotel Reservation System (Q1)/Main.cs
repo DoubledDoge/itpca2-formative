@@ -4,6 +4,8 @@ namespace Hotel_Reservation_System
     {
         static void Main(string[] args)
         {
+            Console.Title = "GrandStay Hotel Reservation System";
+
             Console.WriteLine(
                 "=======================================\n"
                     + "      Welcome to GrandStay Hotel!\n"
@@ -11,15 +13,31 @@ namespace Hotel_Reservation_System
             );
 
             bool isRunning;
+
+            // Simulate loading (Very optional animation for fun)
+            ShowLoadingAnimation();
             do
             {
                 isRunning = HotelReservationSystem.HandleCLIMenu();
             } while (isRunning);
 
-            Console.Write(
+            ConsoleDesign.WriteSuccess(
                 "Thank you for using GrandStay Hotel Reservation System!\nPress Enter to exit..."
             );
             Console.ReadLine();
+        }
+
+        private static void ShowLoadingAnimation()
+        {
+            Console.Write("\nLoading system");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(1000);
+                Console.Write(".");
+            }
+
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }

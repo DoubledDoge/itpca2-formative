@@ -2,10 +2,6 @@ namespace Hotel_Reservation_System
 {
     public static class InputValidator
     {
-        /*  ======================
-                Helper methods
-            ======================  */
-
         public static string GetValidStringInput(string prompt)
         {
             do
@@ -17,7 +13,7 @@ namespace Hotel_Reservation_System
 
                     if (string.IsNullOrWhiteSpace(input))
                     {
-                        Console.Write(
+                        ConsoleDesign.WriteError(
                             "\nError: Input cannot be empty. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
@@ -25,7 +21,7 @@ namespace Hotel_Reservation_System
                     }
                     else if (input.Any(char.IsDigit))
                     {
-                        Console.Write(
+                        ConsoleDesign.WriteError(
                             "\nError: Input should not contain numbers. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
@@ -38,7 +34,9 @@ namespace Hotel_Reservation_System
                 }
                 catch (Exception ex)
                 {
-                    Console.Write($"\nError: {ex.Message}. \nPress Enter to try again...");
+                    ConsoleDesign.WriteError(
+                        $"\nError: {ex.Message}. \nPress Enter to try again..."
+                    );
                     Console.ReadLine();
                     Console.WriteLine();
                 }
@@ -70,7 +68,7 @@ namespace Hotel_Reservation_System
                     }
                     else
                     {
-                        Console.Write(
+                        ConsoleDesign.WriteError(
                             $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
                         );
                         Console.ReadLine();
@@ -79,7 +77,9 @@ namespace Hotel_Reservation_System
                 }
                 catch (Exception ex)
                 {
-                    Console.Write($"\nError: {ex.Message}. \nPress Enter to try again...");
+                    ConsoleDesign.WriteError(
+                        $"\nError: {ex.Message}. \nPress Enter to try again..."
+                    );
                     Console.ReadLine();
                     Console.WriteLine();
                 }
@@ -109,7 +109,7 @@ namespace Hotel_Reservation_System
                     }
                     else
                     {
-                        Console.Write(
+                        ConsoleDesign.WriteError(
                             "\nError: Please enter a valid date in the format dd/mm/yyyy. \nPress Enter to try again..."
                         );
                         Console.ReadLine();
@@ -118,7 +118,9 @@ namespace Hotel_Reservation_System
                 }
                 catch (Exception ex)
                 {
-                    Console.Write($"\nError: {ex.Message}. \nPress Enter to try again...");
+                    ConsoleDesign.WriteError(
+                        $"\nError: {ex.Message}. \nPress Enter to try again..."
+                    );
                     Console.ReadLine();
                     Console.WriteLine();
                 }

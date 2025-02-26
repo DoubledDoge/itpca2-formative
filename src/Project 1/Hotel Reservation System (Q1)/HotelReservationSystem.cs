@@ -5,22 +5,18 @@
         static List<Room> rooms = Room.GetRooms();
         static List<Reservation> reservations = Reservation.GetReservations();
 
-        /*  ======================
-                Main methods
-            ======================  */
-
         public static bool HandleCLIMenu()
         {
-            Console.WriteLine(
-                "============== Hotel Reservation System CLI Menu ==========\n\n"
-                    + "1. Book Room\n"
-                    + "2. Check-in Guest\n"
-                    + "3. Check-out Guest\n"
-                    + "4. View Available Rooms\n"
-                    + "5. View Reservation History\n"
-                    + "0. Exit\n\n"
-                    + "==========================================================\n"
+            ConsoleDesign.WriteHeader("==================== Main Menu ===================\n\n");
+            ConsoleDesign.WriteMenu(
+                "  1. Book Room\n"
+                    + "  2. Check-in Guest\n"
+                    + "  3. Check-out Guest\n"
+                    + "  4. View Available Rooms\n"
+                    + "  5. View Reservation History\n"
+                    + "  0. Exit\n\n"
             );
+            ConsoleDesign.WriteHeader("====================================================\n\n");
 
             int choice = InputValidator.GetValidIntInput("Enter your choice (0-5)", 0, 5);
             Console.WriteLine();
@@ -29,24 +25,32 @@
             {
                 case 1:
                     BookRoom();
+                    WaitAndClear();
                     break;
                 case 2:
                     CheckInGuest();
+                    WaitAndClear();
                     break;
                 case 3:
                     CheckOutGuest();
+                    WaitAndClear();
                     break;
                 case 4:
                     ViewAvailableRooms();
+                    WaitAndClear();
                     break;
                 case 5:
                     ViewReservationHistory();
+                    WaitAndClear();
                     break;
                 case 0:
                     Console.WriteLine("Exiting Hotel Reservation System...\n");
                     return false;
                 default:
-                    Console.WriteLine("How did you get that? Invalid choice. Please try again.\n");
+                    ConsoleDesign.WriteError(
+                        "How did you get that? Invalid choice. Please try again.\n"
+                    );
+                    Console.Clear();
                     break;
             }
             return true;
@@ -89,7 +93,7 @@
 
                 if (roomToBook == null)
                 {
-                    Console.WriteLine(
+                    ConsoleDesign.WriteError(
                         "No available rooms of the selected type. Please choose another type.\n"
                     );
                 }
@@ -104,11 +108,11 @@
 
                 if (checkInDate >= checkOutDate)
                 {
-                    Console.WriteLine("\nCheck-out date must be after check-in date.\n");
+                    ConsoleDesign.WriteError("\nCheck-out date must be after check-in date.\n");
                 }
                 else if (checkInDate < DateTime.Today)
                 {
-                    Console.WriteLine("\nCheck-in date cannot be in the past.\n");
+                    ConsoleDesign.WriteError("\nCheck-in date cannot be in the past.\n");
                 }
             } while (checkInDate >= checkOutDate || checkInDate < DateTime.Today);
 
@@ -122,7 +126,7 @@
 
             roomToBook.IsAvailable = false;
 
-            Console.Write(
+            ConsoleDesign.WriteSuccess(
                 $"\nRoom {roomToBook.RoomNumber} booked for {guest.FullName} from {checkInDate:dd/MM/yyyy} to {checkOutDate:dd/MM/yyyy}.\nPress Enter to continue..."
             );
             Console.ReadLine();
@@ -144,7 +148,7 @@
 
             if (reservation == null)
             {
-                Console.Write(
+                ConsoleDesign.WriteError(
                     $"\nNo reservation found for {guest.FullName} in room {roomNumber}.\nPress Enter to continue..."
                 );
                 Console.ReadLine();
@@ -155,14 +159,16 @@
 
             if (room == null)
             {
-                Console.Write($"\nRoom {roomNumber} does not exist.\nPress Enter to continue...");
+                ConsoleDesign.WriteError(
+                    $"\nRoom {roomNumber} does not exist.\nPress Enter to continue..."
+                );
                 Console.ReadLine();
                 return;
             }
 
             if (room.IsCheckedIn)
             {
-                Console.Write(
+                ConsoleDesign.WriteError(
                     $"\nGuest {guest.FullName} is already checked into room {roomNumber}.\nPress Enter to continue..."
                 );
                 Console.ReadLine();
@@ -171,7 +177,7 @@
 
             room.IsCheckedIn = true;
 
-            Console.Write(
+            ConsoleDesign.WriteSuccess(
                 $"\nGuest {guest.FullName} has been checked into room {roomNumber}.\nPress Enter to continue..."
             );
             Console.ReadLine();
@@ -184,14 +190,16 @@
 
             if (room == null)
             {
-                Console.Write($"\nRoom {roomNumber} does not exist.\nPress Enter to continue...");
+                ConsoleDesign.WriteError(
+                    $"\nRoom {roomNumber} does not exist.\nPress Enter to continue..."
+                );
                 Console.ReadLine();
                 return;
             }
 
             if (!room.IsCheckedIn)
             {
-                Console.Write(
+                ConsoleDesign.WriteError(
                     $"\nRoom {roomNumber} is not currently checked in.\nPress Enter to continue..."
                 );
                 Console.ReadLine();
@@ -209,7 +217,7 @@
             room.IsCheckedIn = false;
             room.IsAvailable = true;
 
-            Console.Write(
+            ConsoleDesign.WriteSuccess(
                 $"\nRoom {roomNumber} has been checked out and is now available for new guests.\nPress Enter to continue..."
             );
             Console.ReadLine();
@@ -225,6 +233,7 @@
             }
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
+            return;
         }
 
         static void ViewReservationHistory()
@@ -232,19 +241,25 @@
             Console.WriteLine("Reservation History:\n");
             if (reservations.Count == 0)
             {
-                Console.WriteLine("No reservations found.");
+                ConsoleDesign.WriteError("No reservations found.\nPress Enter to continue...");
             }
             else
             {
                 foreach (var reservation in reservations)
                 {
-                    Console.WriteLine(
-                        $"Room Number: {reservation.RoomNumber}, Guest: {reservation.GuestFullName}, From: {reservation.CheckInDate:dd/MM/yyyy}, To: {reservation.CheckOutDate:dd/MM/yyyy}"
+                    Console.Write(
+                        $"Room Number: {reservation.RoomNumber}, Guest: {reservation.GuestFullName}, From: {reservation.CheckInDate:dd/MM/yyyy}, To: {reservation.CheckOutDate:dd/MM/yyyy}\nPress Enter to continue..."
                     );
                 }
             }
-            Console.Write("Press Enter to continue...");
             Console.ReadLine();
+            return;
+        }
+
+        static void WaitAndClear()
+        {
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }
