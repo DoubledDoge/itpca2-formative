@@ -76,7 +76,6 @@ dotnet build Project1Solution.sln
 
 ## 🗺️ Roadmap
 ### Short-term Goals
-- Complete both projects
 - Add unit tests?
 - Create complete documentation
 
