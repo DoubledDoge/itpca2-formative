@@ -1,8 +1,11 @@
 # ITPCA2-Assignment
 My two formative projects of C# programming spread across two semesters of my university.
 
-![Project Logo](img/placeholder.png)
-*A visual representation of the project architecture (Coming Soon)*
+<div align="center">
+    <img src="img/csharp.png" alt="Project Logo" width="150" height="150"/>
+    <p><em>C# Programming Language Logo</em></p>
+</div>
+
 
 ## 📑 Table of Contents
 - [Overview](#-overview)
@@ -16,8 +19,13 @@ My two formative projects of C# programming spread across two semesters of my un
 
 ## 🎯 Overview
 This repository contains two C# projects developed as part of a formative assessment:
+
+### Project 1
 1. Hotel Reservation System (Q1)
 2. Bakery Management System (Q2)
+
+### Project 2
+To be determined
 
 Both projects are built using .NET 9.0 and follow modern C# development practices.
 
@@ -27,7 +35,7 @@ Both projects are built using .NET 9.0 and follow modern C# development practice
 #### Project 1
 - 🏨 Hotel Reservation System
 
-  [▓▓▓▓▓▓▓▓░░] 80%
+  [▓▓▓▓▓▓▓▓░] 90%
 
 - 🥖 Bakery Management System
 
@@ -48,19 +56,19 @@ Both projects are built using .NET 9.0 and follow modern C# development practice
 git clone https://github.com/DoubledDoge/itpca2-formative.git
 ```
 
-3. Navigate to the solution directory:
+3. Navigate inside the repository
+
 ```bash
-cd itpca2-formative/src/Project\ 1
+cd itpca2-formative
 ```
 
-4. Restore dependencies:
+4. Open the repository in Visual Studio Code or Visual Studio:
 ```bash
-dotnet restore Project1Solution.sln
-```
+# For Visual Studio Code
+code .
 
-5. Build the solution:
-```bash
-dotnet build Project1Solution.sln
+# For Visual Studio
+start itpca2-formative.sln
 ```
 
 ## ⭐ Features
@@ -68,10 +76,10 @@ dotnet build Project1Solution.sln
 - Basic project structure for both systems
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
-- Hotel Reservation System features
+- Hotel Reservation System features and refinements
 
 ### Planned
-- Hotel Reservation System refinements
+- Hotel Reservation System final bugfixes and potential unit tests
 - Bakery Management System features (Coming Soon)
 
 ## 🗺️ Roadmap
