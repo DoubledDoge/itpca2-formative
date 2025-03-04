@@ -7,6 +7,7 @@ namespace Hotel_Reservation_System
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(message);
             Console.ResetColor();
+            return;
         }
 
         public static void WriteSuccess(string message)
@@ -14,6 +15,7 @@ namespace Hotel_Reservation_System
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(message);
             Console.ResetColor();
+            return;
         }
 
         public static void WriteMenu(string message)
@@ -21,6 +23,7 @@ namespace Hotel_Reservation_System
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(message);
             Console.ResetColor();
+            return;
         }
 
         public static void WriteHeader(string message)

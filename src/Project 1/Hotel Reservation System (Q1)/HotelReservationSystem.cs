@@ -181,6 +181,7 @@
                 $"\nGuest {guest.FullName} has been checked into room {roomNumber}.\nPress Enter to continue..."
             );
             Console.ReadLine();
+            return;
         }
 
         static void CheckOutGuest()
@@ -221,6 +222,7 @@
                 $"\nRoom {roomNumber} has been checked out and is now available for new guests.\nPress Enter to continue..."
             );
             Console.ReadLine();
+            return;
         }
 
         static void ViewAvailableRooms()
@@ -260,6 +262,7 @@
         {
             Thread.Sleep(1000);
             Console.Clear();
+            return;
         }
     }
 }

@@ -1,4 +1,6 @@
 # ITPCA2-Assignment
+
+## 📝 Project Overview
 My two formative projects of C# programming spread across two semesters of my university.
 
 <div align="center">
@@ -89,7 +91,7 @@ start itpca2-formative.sln
 
 ### Long-term Goals
 - Add database integration???
-- Add feedback functionality (Github)
+- Add feedback functionality (GitHub)
 - Begin Project 2 development (May)
 
 ### Estimated completion date (Project 1)

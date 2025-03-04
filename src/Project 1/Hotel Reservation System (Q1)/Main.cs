@@ -25,6 +25,7 @@ namespace Hotel_Reservation_System
                 "Thank you for using GrandStay Hotel Reservation System!\nPress Enter to exit..."
             );
             Console.ReadLine();
+            return;
         }
 
         private static void ShowLoadingAnimation()
@@ -38,6 +39,7 @@ namespace Hotel_Reservation_System
 
             Thread.Sleep(1000);
             Console.Clear();
+            return;
         }
     }
 }
