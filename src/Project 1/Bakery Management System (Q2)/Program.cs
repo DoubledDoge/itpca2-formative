@@ -1,135 +1,17 @@
-﻿namespace Bakery_Management_System
+namespace Bakery_Management_System
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            Console.WriteLine("Hello, World!");
-        }
-
-        /*  ======================
-                Helper methods
-            ======================  */
-        static string GetValidStringInput(string prompt)
-        {
-            do
-            {
-                try
-                {
-                    Console.Write($"{prompt}: ");
-                    string? input = Console.ReadLine()?.Trim();
-
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Console.Write(
-                            "\nError: Input cannot be empty. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else if (input.Any(char.IsDigit))
-                    {
-                        Console.Write(
-                            "\nError: Input should not contain numbers. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        return input;
-                    }
-                }
-                catch (IOException ex)
-                {
-                    Console.Write(
-                        $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
-                    );
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-                catch (OutOfMemoryException)
-                {
-                    Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-
-                Console.WriteLine();
-            } while (true);
-        }
-
-        static int GetValidIntInput(
-            string prompt,
-            int minValue = int.MinValue,
-            int maxValue = int.MaxValue,
-            int? maxLength = default
-        )
-        {
-            do
-            {
-                try
-                {
-                    Console.Write($"{prompt}: ");
-                    string? input = Console.ReadLine()?.Trim();
-
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Console.Write(
-                            "\nError: Input cannot be empty. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else if (maxLength.HasValue && input.Length > maxLength.Value)
-                    {
-                        Console.Write(
-                            $"\nError: Input must not exceed {maxLength.Value} digits. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                    else if (int.TryParse(input, out int result))
-                    {
-                        if (result < minValue || result > maxValue)
-                        {
-                            Console.Write(
-                                $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
-                            );
-                            Console.ReadLine();
-                            Console.WriteLine();
-                        }
-                        else
-                        {
-                            return result;
-                        }
-                    }
-                    else
-                    {
-                        Console.Write(
-                            "\nError: Please enter a valid whole number. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
-                }
-                catch (IOException ex)
-                {
-                    Console.Write(
-                        $"\nError reading input: {ex.Message}. \nPress Enter to try again... "
-                    );
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-                catch (OutOfMemoryException)
-                {
-                    Console.Write("\nError: Input is too large. \nPress Enter to try again... ");
-                    Console.ReadLine();
-                    Console.WriteLine();
-                }
-
-                Console.WriteLine();
-            } while (true);
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
         }
     }
 }
