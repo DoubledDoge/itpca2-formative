@@ -27,7 +27,7 @@ This repository contains two C# projects developed as part of a formative assess
 2. Bakery Management System (Q2)
 
 ### Project 2
-To be determined
+TBD
 
 Both projects are built using .NET 9.0 and follow modern C# development practices.
 
@@ -37,11 +37,11 @@ Both projects are built using .NET 9.0 and follow modern C# development practice
 #### Project 1
 - 🏨 Hotel Reservation System
 
-  [▓▓▓▓▓▓▓▓░] 90%
+  [▓▓▓▓▓▓▓▓▓] 100%
 
 - 🥖 Bakery Management System
 
-  [▓░░░░░░░░░] 10%
+  [▓▓▓▓▓▓▓▓▓] 100%
 
 #### Project 2
 - 📝 Status: Not Started
@@ -73,29 +73,26 @@ code .
 start itpca2-formative.sln
 ```
 
+Note: When trying to open up the Windows Form Application in Visual Studio in designer view, move the Project 1 folder over to a new folder and open it up there instead.
+
 ## ⭐ Features
 ### Implemented
 - Basic project structure for both systems
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
 - Hotel Reservation System features and refinements
+- Hotel Reservation System features and refinements
 
 ### Planned
-- Hotel Reservation System final bugfixes and potential unit tests
-- Bakery Management System features (Coming Soon)
+- Currently nothing (Completed Project 1)
 
 ## 🗺️ Roadmap
 ### Short-term Goals
-- Add unit tests?
-- Create complete documentation
+- TBD
 
 ### Long-term Goals
-- Add database integration???
 - Add feedback functionality (GitHub)
 - Begin Project 2 development (May)
-
-### Estimated completion date (Project 1)
-Probably around 03 to 10 March. There is a slight chance I may get to finish it sooner though.
 
 ## 🤝 Contributing
 1. Clone the repository
@@ -111,6 +108,7 @@ This project is licensed under the GNU GPL v3 License - see the LICENSE file for
 - Project uses .NET 9.0 preview features
 - VS Code settings are configured for optimal C# development
 - CI/CD pipeline runs on Windows latest
+- Makes use of a SQL Server and queries for the Bakery Management System.
 
 ---
 Last Updated: 2025
