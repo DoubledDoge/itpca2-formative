@@ -81,7 +81,7 @@ Note: When trying to open up the Windows Form Application in Visual Studio in de
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
 - Hotel Reservation System features and refinements
-- Hotel Reservation System features and refinements
+- Hotel Reservation System features and SQL implementations
 
 ### Planned
 - Currently nothing (Completed Project 1)
