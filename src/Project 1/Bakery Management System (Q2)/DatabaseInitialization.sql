@@ -1,3 +1,9 @@
+USE BakeryManagementDB
+DROP TABLE Products
+DROP TABLE Customers
+DROP TABLE Orders
+DROP TABLE OrderDetails
+
 CREATE TABLE Products (
     ProductID INT PRIMARY KEY IDENTITY(1,1),
     ProductName VARCHAR(100) NOT NULL,
