@@ -118,6 +118,7 @@
             // 
             buttonClearSearch.AutoSize = true;
             buttonClearSearch.BackColor = Color.Coral;
+            buttonClearSearch.Cursor = Cursors.Hand;
             buttonClearSearch.FlatStyle = FlatStyle.Flat;
             buttonClearSearch.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             buttonClearSearch.Location = new Point(709, 225);
@@ -298,7 +299,6 @@
             productTable.ColumnStyles.Add(new ColumnStyle());
             productTable.ColumnStyles.Add(new ColumnStyle());
             productTable.ColumnStyles.Add(new ColumnStyle());
-            productTable.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             productTable.Location = new Point(12, 12);
             productTable.Name = "productTable";
             productTable.RowCount = 4;
