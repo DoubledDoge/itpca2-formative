@@ -10,7 +10,7 @@
     <ApplicationIcon>assets/bakery.ico</ApplicationIcon>
     <StartupObject>Bakery_Management_System.Program</StartupObject>
     <Title>Bakery Management System</Title>
-    <Authors>Your Company Name</Authors>
+    <Authors>Fluffy Bakes</Authors>
     <Description>A management system for bakery operations</Description>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
