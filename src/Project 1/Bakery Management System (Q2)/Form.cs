@@ -89,7 +89,7 @@ namespace Bakery_Management_System
             {
                 // Connect to SQL Server (Change this value to your server!)
                 string connectionString =
-                    @"Data Source=DDSWORKSPACE;Initial Catalog=""BakeryManagementDB"";Integrated Security=True;TrustServerCertificate=True";
+                    @"Data Source=DDSWORKSPACE;Initial Catalog=BakeryManagementDB;Integrated Security=True;TrustServerCertificate=True";
                 dbManager = new DatabaseManager(connectionString);
 
                 if (!dbManager.TestConnection())
