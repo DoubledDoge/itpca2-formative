@@ -2,10 +2,10 @@
 {
     public static class HotelReservationSystem
     {
-        static List<Room> rooms = Room.GetRooms();
-        static List<Reservation> reservations = Reservation.GetReservations();
+        private static readonly List<Room> Rooms = Room.GetRooms();
+        private static readonly List<Reservation> Reservations = Reservation.GetReservations();
 
-        public static bool HandleCLIMenu()
+        public static bool HandleCliMenu()
         {
             ConsoleDesign.WriteHeader("==================== Main Menu ===================\n\n");
             ConsoleDesign.WriteMenu(
@@ -56,7 +56,7 @@
             return true;
         }
 
-        static void BookRoom()
+        private static void BookRoom()
         {
             string firstName = InputValidator.GetValidStringInput("Enter guest first name");
             string lastName = InputValidator.GetValidStringInput("Enter guest last name");
@@ -65,16 +65,13 @@
             Room roomToBook;
             do
             {
-                int roomTypeChoice;
-                string roomType;
-
-                roomTypeChoice = InputValidator.GetValidIntInput(
+                int roomTypeChoice = InputValidator.GetValidIntInput(
                     "Enter room type to book (1: Single, 2: Double, 3: Suite)",
                     1,
                     3
                 );
 
-                roomType = roomTypeChoice switch
+                string roomType = roomTypeChoice switch
                 {
                     1 => "Single",
                     2 => "Double",
@@ -86,17 +83,10 @@
 
                 // Find the first available room of the chosen type
                 roomToBook =
-                    rooms.FirstOrDefault(r => r.RoomType == roomType && r.IsAvailable)
+                    Rooms.FirstOrDefault(r => r.RoomType == roomType && r.IsAvailable)
                     ?? throw new InvalidOperationException(
                         "No available rooms of the selected type."
                     ); // Throw exception if no available rooms of the selected type
-
-                if (roomToBook == null)
-                {
-                    ConsoleDesign.WriteError(
-                        "No available rooms of the selected type. Please choose another type.\n"
-                    );
-                }
             } while (roomToBook == null);
 
             DateTime checkInDate;
@@ -122,7 +112,7 @@
                 checkInDate,
                 checkOutDate
             );
-            reservations.Add(reservation);
+            Reservations.Add(reservation);
 
             roomToBook.IsAvailable = false;
 
@@ -130,10 +120,9 @@
                 $"\nRoom {roomToBook.RoomNumber} booked for {guest.FullName} from {checkInDate:dd/MM/yyyy} to {checkOutDate:dd/MM/yyyy}.\nPress Enter to continue..."
             );
             Console.ReadLine();
-            return;
         }
 
-        static void CheckInGuest()
+        private static void CheckInGuest()
         {
             string firstName = InputValidator.GetValidStringInput("Enter guest first name");
             string lastName = InputValidator.GetValidStringInput("Enter guest last name");
@@ -141,7 +130,7 @@
             int roomNumber = InputValidator.GetValidIntInput("Enter room number");
 
             // Find the reservation
-            var reservation = reservations.FirstOrDefault(r =>
+            var reservation = Reservations.FirstOrDefault(r =>
                 string.Equals(r.GuestFullName, guest.FullName, StringComparison.OrdinalIgnoreCase)
                 && r.RoomNumber == roomNumber
             );
@@ -155,7 +144,7 @@
                 return;
             }
 
-            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            var room = Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
 
             if (room == null)
             {
@@ -181,13 +170,12 @@
                 $"\nGuest {guest.FullName} has been checked into room {roomNumber}.\nPress Enter to continue..."
             );
             Console.ReadLine();
-            return;
         }
 
-        static void CheckOutGuest()
+        private static void CheckOutGuest()
         {
             int roomNumber = InputValidator.GetValidIntInput("Enter room number");
-            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber); // Find the room
+            var room = Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber); // Find the room
 
             if (room == null)
             {
@@ -208,11 +196,11 @@
             }
 
             // Find the reservation
-            var reservation = reservations.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            var reservation = Reservations.FirstOrDefault(r => r.RoomNumber == roomNumber);
 
             if (reservation != null)
             {
-                reservations.Remove(reservation);
+                Reservations.Remove(reservation);
             }
 
             room.IsCheckedIn = false;
@@ -222,32 +210,30 @@
                 $"\nRoom {roomNumber} has been checked out and is now available for new guests.\nPress Enter to continue..."
             );
             Console.ReadLine();
-            return;
         }
 
-        static void ViewAvailableRooms()
+        private static void ViewAvailableRooms()
         {
             // Display available rooms
             Console.WriteLine("Available Rooms:\n");
-            foreach (var room in rooms.Where(r => r.IsAvailable))
+            foreach (var room in Rooms.Where(r => r.IsAvailable))
             {
                 Console.WriteLine($"Room: {room.RoomNumber} - {room.RoomType}\n");
             }
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
-            return;
         }
 
-        static void ViewReservationHistory()
+        private static void ViewReservationHistory()
         {
             Console.WriteLine("Reservation History:\n");
-            if (reservations.Count == 0)
+            if (Reservations.Count == 0)
             {
                 ConsoleDesign.WriteError("No reservations found.\nPress Enter to continue...");
             }
             else
             {
-                foreach (var reservation in reservations)
+                foreach (var reservation in Reservations)
                 {
                     Console.Write(
                         $"Room Number: {reservation.RoomNumber}, Guest: {reservation.GuestFullName}, From: {reservation.CheckInDate:dd/MM/yyyy}, To: {reservation.CheckOutDate:dd/MM/yyyy}\nPress Enter to continue..."
@@ -255,14 +241,12 @@
                 }
             }
             Console.ReadLine();
-            return;
         }
 
-        static void WaitAndClear()
+        private static void WaitAndClear()
         {
             Thread.Sleep(1000);
             Console.Clear();
-            return;
         }
     }
 }

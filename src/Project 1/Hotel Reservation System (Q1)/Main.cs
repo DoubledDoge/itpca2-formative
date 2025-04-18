@@ -18,7 +18,7 @@ namespace Hotel_Reservation_System
             ShowLoadingAnimation();
             do
             {
-                isRunning = HotelReservationSystem.HandleCLIMenu();
+                isRunning = HotelReservationSystem.HandleCliMenu();
             } while (isRunning);
 
             ConsoleDesign.WriteSuccess(
