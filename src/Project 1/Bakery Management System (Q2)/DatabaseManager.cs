@@ -52,7 +52,7 @@ namespace Bakery_Management_System
                                     ProductName = reader["ProductName"]?.ToString() ?? string.Empty,
                                     Category = reader["Category"]?.ToString() ?? string.Empty,
                                     Price = Convert.ToSingle(reader["Price"]),
-                                    QuantityInStock = Convert.ToInt32(reader["QuantityInStock"])
+                                    QuantityInStock = Convert.ToInt32(reader["QuantityInStock"]),
                                 };
                                 products.Add(product);
                             }
@@ -76,17 +76,21 @@ namespace Bakery_Management_System
                 using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
-                    string query = @"INSERT INTO Products (ProductName, Category, Price, QuantityInStock) 
+                    string query =
+                        @"INSERT INTO Products (ProductName, Category, Price, QuantityInStock) 
                                    VALUES (@ProductName, @Category, @Price, @QuantityInStock);
                                    SELECT SCOPE_IDENTITY();";
-                    
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", product.ProductName);
                         command.Parameters.AddWithValue("@Category", product.Category);
                         command.Parameters.AddWithValue("@Price", product.Price);
-                        command.Parameters.AddWithValue("@QuantityInStock", product.QuantityInStock);
-                        
+                        command.Parameters.AddWithValue(
+                            "@QuantityInStock",
+                            product.QuantityInStock
+                        );
+
                         // Get the newly created ID and assign it to the product
                         product.ProductID = Convert.ToInt32(command.ExecuteScalar());
                         return true;
@@ -108,21 +112,25 @@ namespace Bakery_Management_System
                 using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
-                    string query = @"UPDATE Products 
+                    string query =
+                        @"UPDATE Products 
                                    SET ProductName = @ProductName, 
                                        Category = @Category, 
                                        Price = @Price, 
                                        QuantityInStock = @QuantityInStock 
                                    WHERE ProductID = @ProductID";
-                    
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductID", product.ProductID);
                         command.Parameters.AddWithValue("@ProductName", product.ProductName);
                         command.Parameters.AddWithValue("@Category", product.Category);
                         command.Parameters.AddWithValue("@Price", product.Price);
-                        command.Parameters.AddWithValue("@QuantityInStock", product.QuantityInStock);
-                        
+                        command.Parameters.AddWithValue(
+                            "@QuantityInStock",
+                            product.QuantityInStock
+                        );
+
                         int rowsAffected = command.ExecuteNonQuery();
                         return rowsAffected > 0;
                     }
@@ -144,11 +152,11 @@ namespace Bakery_Management_System
                 {
                     connection.Open();
                     string query = "DELETE FROM Products WHERE ProductID = @ProductID";
-                    
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductID", productId);
-                        
+
                         int rowsAffected = command.ExecuteNonQuery();
                         return rowsAffected > 0;
                     }
@@ -165,21 +173,22 @@ namespace Bakery_Management_System
         public List<Product> SearchProducts(string searchTerm)
         {
             List<Product> results = new List<Product>();
-            
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(this.connectionString))
                 {
                     connection.Open();
-                    string query = @"SELECT * FROM Products 
+                    string query =
+                        @"SELECT * FROM Products 
                                    WHERE ProductName LIKE @SearchTerm 
                                    OR Category LIKE @SearchTerm 
                                    OR CAST(ProductID AS VARCHAR) LIKE @SearchTerm";
-                    
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@SearchTerm", "%" + searchTerm + "%");
-                        
+
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -190,7 +199,7 @@ namespace Bakery_Management_System
                                     ProductName = reader["ProductName"]?.ToString() ?? string.Empty,
                                     Category = reader["Category"]?.ToString() ?? string.Empty,
                                     Price = Convert.ToSingle(reader["Price"]),
-                                    QuantityInStock = Convert.ToInt32(reader["QuantityInStock"])
+                                    QuantityInStock = Convert.ToInt32(reader["QuantityInStock"]),
                                 };
                                 results.Add(product);
                             }
@@ -203,9 +212,8 @@ namespace Bakery_Management_System
                 // Logging (Because why not?)
                 Console.WriteLine($"Error searching products: {ex.Message}");
             }
-            
+
             return results;
         }
-
     }
 }

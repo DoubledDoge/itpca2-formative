@@ -58,6 +58,9 @@ jobs:
         dotnet tool install -g csharpier
         dotnet restore "${{ env.SOLUTION_PATH }}"
 
+    - name: Format code with csharpier
+      run: dotnet csharpier .
+
     - name: Check code formatting
       run: dotnet csharpier --check .
 
