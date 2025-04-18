@@ -1,0 +1,75 @@
+name: .NET CI/CD
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - '**.csproj'
+      - '**.sln'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - '**.csproj'
+      - '**.sln'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      actions: write
+      # Required for commenting on PRs if needed
+      pull-requests: write
+      # Required for checking security advisories
+      security-events: write
+
+    env:
+      Solution_Name: Project1Solution.sln # For now, only one solution
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true # Privacy preference
+      DOTNET_NOLOGO: true # Personal preference
+      SOLUTION_PATH: src/Project 1/Project1Solution.sln
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Fetch all history for better versioning
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Install tools and dependencies
+      run:
+        dotnet tool install -g csharpier
+        dotnet restore "${{ env.SOLUTION_PATH }}"
+
+    - name: Check code formatting
+      run: dotnet csharpier --check .
+
+    - name: Build project with release configuration
+      run: dotnet build "${{ env.SOLUTION_PATH }}" --configuration Release --no-restore
+
+    - name: Cache build artifacts
+      uses: actions/cache@v4
+      with:
+        path: |
+          **/bin
+          **/obj
+        key: ${{ runner.os }}-build-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-build-
