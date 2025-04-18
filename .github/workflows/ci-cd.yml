@@ -61,8 +61,6 @@ jobs:
     - name: Format code with csharpier
       run: dotnet csharpier .
 
-    - name: Check code formatting
-      run: dotnet csharpier --check .
 
     - name: Build project with release configuration
       run: dotnet build "${{ env.SOLUTION_PATH }}" --configuration Release --no-restore
