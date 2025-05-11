@@ -1,9 +1,10 @@
-﻿namespace Drone_Racing_System;
-
-class Program
+﻿namespace Drone_Racing_System
 {
-    static void Main(string[] args)
+    static class Program
     {
-        Console.WriteLine("Hello, World!");
+        private static void Main()
+        {
+            Console.WriteLine("Hello, World!");
+        }
     }
 }

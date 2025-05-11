@@ -1,9 +1,10 @@
-﻿namespace Clinic_Patient_Management_System;
-
-class Program
+﻿namespace Clinic_Patient_Management_System
 {
-    static void Main(string[] args)
+    static class Program
     {
-        Console.WriteLine("Hello, World!");
+        private static void Main()
+        {
+            Console.WriteLine("Hello, World!");
+        }
     }
 }

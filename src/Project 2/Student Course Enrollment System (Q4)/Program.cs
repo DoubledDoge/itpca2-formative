@@ -1,9 +1,10 @@
-﻿namespace Student_Course_Enrollment_System;
-
-class Program
+﻿namespace Student_Course_Enrollment_System
 {
-    static void Main(string[] args)
+    static class Program
     {
-        Console.WriteLine("Hello, World!");
+        private static void Main()
+        {
+            Console.WriteLine("Hello, World!");
+        }
     }
 }
