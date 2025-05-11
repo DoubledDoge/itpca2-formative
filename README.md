@@ -27,7 +27,9 @@ This repository contains two C# projects developed as part of a formative assess
 2. Bakery Management System (Q2)
 
 ### Project 2
-TBD
+1. Clinic Patient Management System (Q1+Q2)
+2. Drone Racing System (Q3)
+3. Student Course Enrollment System (Q4)
 
 Both projects are built using .NET 9.0 and follow modern C# development practices.
 
@@ -35,16 +37,24 @@ Both projects are built using .NET 9.0 and follow modern C# development practice
 ### Completion Progress
 
 #### Project 1
-- 🏨 Hotel Reservation System
+- Hotel Reservation System
 
   [▓▓▓▓▓▓▓▓▓] 100%
 
-- 🥖 Bakery Management System
+- Bakery Management System
 
   [▓▓▓▓▓▓▓▓▓] 100%
 
 #### Project 2
-- 📝 Status: Not Started
+-  Clinic Patient Management System
+
+  [░░░░░░░░░░] 0%
+
+- Drone Racing System
+
+  [░░░░░░░░░░] 0%
+
+- Student Course Enrollment System
 
   [░░░░░░░░░░] 0%
 
@@ -65,34 +75,25 @@ cd itpca2-formative
 ```
 
 4. Open the repository in Visual Studio Code or Visual Studio:
-```bash
-# For Visual Studio Code
-code .
-
-# For Visual Studio
-start itpca2-formative.sln
-```
 
 Note: When trying to open up the Windows Form Application in Visual Studio in designer view, move the Project 1 folder over to a new folder and open it up there instead.
 
 ## ⭐ Features
 ### Implemented
-- Basic project structure for both systems
+- Basic project structure for both projects
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
-- Hotel Reservation System features and refinements
-- Hotel Reservation System features and SQL implementations
+- Project 1
 
 ### Planned
 - Currently nothing (Completed Project 1)
 
 ## 🗺️ Roadmap
 ### Short-term Goals
-- TBD
+- Complete Clinic Patient Management System
 
 ### Long-term Goals
-- Add feedback functionality (GitHub)
-- Begin Project 2 development (May)
+- Complete Project 2 development
 
 ## 🤝 Contributing
 1. Clone the repository
