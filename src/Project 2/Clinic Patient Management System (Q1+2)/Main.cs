@@ -6,11 +6,38 @@
         {
             Console.Title = "RANDS Clinic Patient Management System";
 
-            Console.WriteLine(
-                "=======================================\n"
+            Console.Write(
+                "==================================\n"
                 + "      RANDS Health Clinic\n"
-                + "=======================================\n"
+                + "==================================\n"
             );
+
+            bool isRunning;
+
+            ShowLoadingAnimation();
+            do
+            {
+                isRunning = PatientManagementSystem.HandleCliMenu();
+            } while (isRunning);
+
+            ConsoleDesign.WriteSuccess(
+                "Thank you for using RANDS Clinic Patient Management System!\nPress Enter to exit..."
+            );
+            Console.ReadLine();
+        }
+
+        private static void ShowLoadingAnimation()
+        {
+            Console.Write("\nLoading system");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(1000);
+                Console.Write(".");
+
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }
+
