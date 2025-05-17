@@ -63,6 +63,10 @@ jobs:
     - name: Format code with csharpier
       run: dotnet csharpier format .
 
+    - name: Restore all NuGet packages
+      run: |
+        Get-ChildItem -Path src -Recurse -Include *.sln,*.csproj | ForEach-Object { dotnet restore $_.FullName }
+
     - name: Build project with release configuration
       run: dotnet build "${{ matrix.solution.path }}" --configuration Release --no-restore
 
