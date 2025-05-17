@@ -23,22 +23,26 @@ jobs:
     permissions:
       contents: read
       actions: write
-      # Required for commenting on PRs if needed
       pull-requests: write
-      # Required for checking security advisories
       security-events: write
 
+    strategy:
+      matrix:
+        solution:
+          - name: Project1Solution.sln
+            path: src/Project 1/Project1Solution.sln
+          - name: Project2Solution.sln
+            path: src/Project 2/Project2Solution.sln
+
     env:
-      Solution_Name: Project1Solution.sln # For now, only one solution
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true # Privacy preference
-      DOTNET_NOLOGO: true # Personal preference
-      SOLUTION_PATH: src/Project 1/Project1Solution.sln
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_NOLOGO: true
 
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0 # Fetch all history for better versioning
+        fetch-depth: 0
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -56,14 +60,13 @@ jobs:
     - name: Install tools and dependencies
       run: |
         dotnet tool install -g csharpier
-        dotnet restore "${{ env.SOLUTION_PATH }}"
+        dotnet restore "${{ matrix.solution.path }}"
 
     - name: Format code with csharpier
       run: dotnet csharpier .
 
-
     - name: Build project with release configuration
-      run: dotnet build "${{ env.SOLUTION_PATH }}" --configuration Release --no-restore
+      run: dotnet build "${{ matrix.solution.path }}" --configuration Release --no-restore
 
     - name: Cache build artifacts
       uses: actions/cache@v4
