@@ -2,7 +2,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
+    <ApplicationIcon>clinic.ico</ApplicationIcon>
     <RootNamespace>Clinic_Patient_Management_System</RootNamespace>
+    <AssemblyName>RANDS Patient Management System</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

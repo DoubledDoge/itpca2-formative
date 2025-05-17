@@ -9,10 +9,11 @@
             Console.Write(
                 "==================================\n"
                     + "      RANDS Health Clinic\n"
-                    + "==================================\n"
+                    + "==================================\n\n"
             );
 
             bool isRunning;
+            Console.WriteLine("Welcome to RANDS Clinic Patient Management System!\n");
 
             ShowLoadingAnimation();
             do

@@ -2,7 +2,7 @@
 {
     public static class PatientManagementSystem
     {
-        private static readonly List<Patient> Patients = Patient.GetPatients();
+        private static readonly List<Patient> Patients = Patient.GetSamplePatients();
 
         public static bool HandleCliMenu()
         {
@@ -12,11 +12,12 @@
                     + "  2. Remove Patient\n"
                     + "  3. Search Patient\n"
                     + "  4. Display All Patients\n"
-                    + "  5. Exit\n\n"
+                    + "  5. Print Patient Information to File\n"
+                    + "  6. Exit\n\n"
             );
             ConsoleDesign.WriteHeader("=================================================\n\n");
 
-            int choice = InputValidator.GetValidIntInput("Enter your choice (1-5)", 1, 5);
+            int choice = InputValidator.GetValidIntInput("Enter your choice (1-6)", 1, 6);
             Console.WriteLine();
 
             switch (choice)
@@ -38,6 +39,10 @@
                     WaitAndClear();
                     break;
                 case 5:
+                    FileManagement.PrintPatientInfoToFile(Patients);
+                    WaitAndClear();
+                    break;
+                case 6:
                     Console.WriteLine("Exiting Patient Management System..\n");
                     return false;
                 default:
@@ -64,7 +69,7 @@
 
             // Display success message:
             ConsoleDesign.WriteSuccess($"\nPatient '{fullName}' added successfully!\n");
-            Console.WriteLine("Press Enter to continue...");
+            Console.Write("Press Enter to continue...");
             Console.ReadLine();
         }
 
@@ -79,16 +84,27 @@
                 return;
             }
 
-            // Display all patients:
-            DisplayAllPatients();
-
-            // Get the patient number to remove:
+            // Get the patient number to remove (Also act as a check for valid input):
             int toRemove = InputValidator.GetValidIntInput(
                 $"Enter the number of the patient to remove (1-{Patients.Count})",
                 1,
                 Patients.Count
             );
             var removedPatient = Patients[toRemove - 1];
+
+            /*
+                Alternative way to check for patient existence (Without input validation):
+
+                var removedPatient = Patients.ElementAtOrDefault(toRemove - 1);
+
+                if (removedPatient == null)
+                {
+                    ConsoleDesign.WriteError("Invalid patient number. Please try again.\n");
+                    return;
+                }
+
+                (Reason why it's not used: The input validator already checks for valid input between the first valid 'index' (1) and last one, so this is redundant.)
+             */
 
             // Remove the patient from the list:
             Patients.RemoveAt(toRemove - 1);
@@ -97,7 +113,7 @@
             ConsoleDesign.WriteSuccess(
                 $"\nPatient '{removedPatient.FullName}' removed successfully!\n"
             );
-            Console.WriteLine("Press Enter to continue...");
+            Console.Write("Press Enter to continue...");
             Console.ReadLine();
         }
 
@@ -107,7 +123,7 @@
             if (Patients.Count == 0)
             {
                 ConsoleDesign.WriteError("No patients to search.\n");
-                Console.WriteLine("Press Enter to continue...");
+                Console.Write("Press Enter to continue...");
                 Console.ReadLine();
                 return;
             }
@@ -125,14 +141,11 @@
             // Display search results:
             if (matches.Count == 0)
             {
-                ConsoleDesign.WriteError($"No patients found matching '{searchTerm}'.\n");
+                ConsoleDesign.WriteError($"Patient not found.\n");
             }
             else
             {
                 Console.WriteLine($"\nFound {matches.Count} patient(s):\n");
-                ConsoleDesign.WriteHeader("================================================");
-                Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
-                ConsoleDesign.WriteHeader("================================================");
 
                 int count = 1;
                 foreach (var patient in matches)
@@ -142,10 +155,9 @@
                     );
                     count++;
                 }
-                ConsoleDesign.WriteHeader("================================================\n");
             }
 
-            Console.WriteLine("Press Enter to continue...");
+            Console.Write("Press Enter to continue...");
             Console.ReadLine();
         }
 
