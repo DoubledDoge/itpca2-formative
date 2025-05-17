@@ -57,6 +57,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-nuget-
 
+    - name: Install tools and dependencies
+      run: dotnet tool install csharpier --create-manifest-if-needed
+
+    - name: Format code with csharpier
+      run: dotnet csharpier format .
+
     - name: Build project with release configuration
       run: dotnet build "${{ matrix.solution.path }}" --configuration Release --no-restore
 

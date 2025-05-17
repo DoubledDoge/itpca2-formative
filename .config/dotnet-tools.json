@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "csharpier": {
+      "version": "1.0.1",
+      "commands": [
+        "csharpier"
+      ],
+      "rollForward": false
+    },
+    "dotnetsay": {
+      "version": "2.1.7",
+      "commands": [
+        "dotnetsay"
+      ],
+      "rollForward": false
+    }
+  }
+}

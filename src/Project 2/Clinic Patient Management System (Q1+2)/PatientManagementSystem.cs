@@ -9,10 +9,10 @@
             ConsoleDesign.WriteHeader("=================== Main Menu ===================\n\n");
             ConsoleDesign.WriteMenu(
                 "  1. Add Patient\n"
-                + "  2. Remove Patient\n"
-                + "  3. Search Patient\n"
-                + "  4. Display All Patients\n"
-                + "  5. Exit\n\n"
+                    + "  2. Remove Patient\n"
+                    + "  3. Search Patient\n"
+                    + "  4. Display All Patients\n"
+                    + "  5. Exit\n\n"
             );
             ConsoleDesign.WriteHeader("=================================================\n\n");
 
@@ -54,7 +54,9 @@
             // Get patient details:
             string fullName = InputValidator.GetValidStringInput("Enter patient's full name");
             int age = InputValidator.GetValidIntInput("Enter patient's age", 0, 120);
-            string medCondition = InputValidator.GetValidStringInput("Enter patient's medical condition");
+            string medCondition = InputValidator.GetValidStringInput(
+                "Enter patient's medical condition"
+            );
 
             // Add patient to the list:
             var newPatient = new Patient(fullName, age, medCondition);
@@ -81,14 +83,20 @@
             DisplayAllPatients();
 
             // Get the patient number to remove:
-            int toRemove = InputValidator.GetValidIntInput($"Enter the number of the patient to remove (1-{Patients.Count})", 1, Patients.Count);
+            int toRemove = InputValidator.GetValidIntInput(
+                $"Enter the number of the patient to remove (1-{Patients.Count})",
+                1,
+                Patients.Count
+            );
             var removedPatient = Patients[toRemove - 1];
 
             // Remove the patient from the list:
             Patients.RemoveAt(toRemove - 1);
 
             // Display success message:
-            ConsoleDesign.WriteSuccess($"\nPatient '{removedPatient.FullName}' removed successfully!\n");
+            ConsoleDesign.WriteSuccess(
+                $"\nPatient '{removedPatient.FullName}' removed successfully!\n"
+            );
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
         }
@@ -105,7 +113,9 @@
             }
 
             // Get the search term:
-            string searchTerm = InputValidator.GetValidStringInput("Enter patient name or part of name to search");
+            string searchTerm = InputValidator.GetValidStringInput(
+                "Enter patient name or part of name to search"
+            );
 
             // Search for patients:
             var matches = Patients
@@ -121,13 +131,15 @@
             {
                 Console.WriteLine($"\nFound {matches.Count} patient(s):\n");
                 ConsoleDesign.WriteHeader("================================================");
-                Console.WriteLine($"{"No.",-5}{"Name",-25}{"Age",-5}{"Condition",-20}");
+                Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
                 ConsoleDesign.WriteHeader("================================================");
 
                 int count = 1;
                 foreach (var patient in matches)
                 {
-                    Console.WriteLine($"{count,-5}{patient.FullName,-25}{patient.Age,-5}{patient.MedCondition,-20}");
+                    Console.WriteLine(
+                        $"{count, -5}{patient.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
+                    );
                     count++;
                 }
                 ConsoleDesign.WriteHeader("================================================\n");
@@ -153,11 +165,13 @@
             // Display all patients:
             Console.WriteLine("Registered Patients:\n");
             ConsoleDesign.WriteHeader("================================================");
-            Console.WriteLine($"{"No.",-5}{"Name",-25}{"Age",-5}{"Condition",-20}");
+            Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
             ConsoleDesign.WriteHeader("================================================");
             foreach (var patient in Patients)
             {
-                Console.WriteLine($"{count,-5}{patient.FullName,-25}{patient.Age,-5}{patient.MedCondition,-20}");
+                Console.WriteLine(
+                    $"{count, -5}{patient.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
+                );
                 count++;
             }
             ConsoleDesign.WriteHeader("================================================\n");

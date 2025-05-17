@@ -8,8 +8,8 @@
 
             Console.Write(
                 "==================================\n"
-                + "      RANDS Health Clinic\n"
-                + "==================================\n"
+                    + "      RANDS Health Clinic\n"
+                    + "==================================\n"
             );
 
             bool isRunning;
@@ -33,11 +33,9 @@
             {
                 Thread.Sleep(1000);
                 Console.Write(".");
-
             }
             Thread.Sleep(1000);
             Console.Clear();
         }
     }
 }
-
