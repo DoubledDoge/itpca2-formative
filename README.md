@@ -86,9 +86,6 @@ Note: When trying to open up the Windows Form Application in Visual Studio in de
 - Project 1
 - Mostly Clinic Patient Management System
 
-### Planned
-- Currently nothing (Completed Project 1)
-
 ## 🗺️ Roadmap
 ### Short-term Goals
 - Complete Drone Racing System
