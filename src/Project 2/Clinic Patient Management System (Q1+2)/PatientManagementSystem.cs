@@ -51,13 +51,16 @@
 
         private static void AddPatient()
         {
+            // Get patient details:
             string fullName = InputValidator.GetValidStringInput("Enter patient's full name");
             int age = InputValidator.GetValidIntInput("Enter patient's age", 0, 120);
             string medCondition = InputValidator.GetValidStringInput("Enter patient's medical condition");
 
+            // Add patient to the list:
             var newPatient = new Patient(fullName, age, medCondition);
             Patients.Add(newPatient);
 
+            // Display success message:
             ConsoleDesign.WriteSuccess($"\nPatient '{fullName}' added successfully!\n");
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
@@ -65,6 +68,7 @@
 
         private static void RemovePatient()
         {
+            // Check if there are any patients to remove:
             if (Patients.Count == 0)
             {
                 ConsoleDesign.WriteError("No patients to remove.\n");
@@ -73,12 +77,17 @@
                 return;
             }
 
+            // Display all patients:
             DisplayAllPatients();
 
+            // Get the patient number to remove:
             int toRemove = InputValidator.GetValidIntInput($"Enter the number of the patient to remove (1-{Patients.Count})", 1, Patients.Count);
             var removedPatient = Patients[toRemove - 1];
+
+            // Remove the patient from the list:
             Patients.RemoveAt(toRemove - 1);
 
+            // Display success message:
             ConsoleDesign.WriteSuccess($"\nPatient '{removedPatient.FullName}' removed successfully!\n");
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
@@ -86,6 +95,7 @@
 
         private static void SearchPatient()
         {
+            // Check if there are any patients to search:
             if (Patients.Count == 0)
             {
                 ConsoleDesign.WriteError("No patients to search.\n");
@@ -94,11 +104,15 @@
                 return;
             }
 
+            // Get the search term:
             string searchTerm = InputValidator.GetValidStringInput("Enter patient name or part of name to search");
+
+            // Search for patients:
             var matches = Patients
                 .Where(p => p.FullName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
+            // Display search results:
             if (matches.Count == 0)
             {
                 ConsoleDesign.WriteError($"No patients found matching '{searchTerm}'.\n");
