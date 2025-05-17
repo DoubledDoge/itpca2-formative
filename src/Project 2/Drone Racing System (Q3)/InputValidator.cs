@@ -1,4 +1,4 @@
-namespace Clinic_Patient_Management_System
+namespace Drone_Racing_System
 {
     public static class InputValidator
     {
@@ -85,6 +85,5 @@ namespace Clinic_Patient_Management_System
                 }
             } while (true);
         }
-
     }
 }
