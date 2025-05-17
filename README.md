@@ -48,15 +48,15 @@ Both projects are built using .NET 9.0 and follow modern C# development practice
 #### Project 2
 -  Clinic Patient Management System
 
-  [░░░░░░░░░░] 0%
+   [▓▓▓▓▓▓▓░░] 80%
 
 - Drone Racing System
 
-  [░░░░░░░░░░] 0%
+  [▓░░░░░░░░░] 5%
 
 - Student Course Enrollment System
 
-  [░░░░░░░░░░] 0%
+  [▓░░░░░░░░░] 5%
 
 ## 🚀 Setup Instructions
 1. Prerequisites:
@@ -84,13 +84,14 @@ Note: When trying to open up the Windows Form Application in Visual Studio in de
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
 - Project 1
+- Mostly Clinic Patient Management System
 
 ### Planned
 - Currently nothing (Completed Project 1)
 
 ## 🗺️ Roadmap
 ### Short-term Goals
-- Complete Clinic Patient Management System
+- Complete Drone Racing System
 
 ### Long-term Goals
 - Complete Project 2 development
@@ -109,7 +110,6 @@ This project is licensed under the GNU GPL v3 License - see the LICENSE file for
 - Project uses .NET 9.0 preview features
 - VS Code settings are configured for optimal C# development
 - CI/CD pipeline runs on Windows latest
-- Makes use of a SQL Server and queries for the Bakery Management System.
 
 ---
 Last Updated: 2025
