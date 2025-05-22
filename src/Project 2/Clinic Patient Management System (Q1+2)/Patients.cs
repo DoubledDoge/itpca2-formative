@@ -6,7 +6,7 @@
         public int Age { get; } = age;
         public string MedCondition { get; } = medCondition;
 
-        public static List<Patient> GetSamplePatients()
+        public static Patient[] GetSamplePatients()
         {
             return
             [
@@ -21,12 +21,6 @@
                 new Patient("Tshepo Mabena", 45, "Back Pain"),
                 new Patient("Zanele Hlophe", 33, "Anxiety"),
             ];
-
-            /*
-               Alternatively, you can use the following code to create a list of sample patients:
-               Patient.Add(new Patient("Sarah Mokoena", 34, "Hypertension"));
-               (Repeat for the rest of the data)
-             */
         }
     }
 }

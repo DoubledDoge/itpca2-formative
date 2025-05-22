@@ -2,7 +2,18 @@
 {
     public static class PatientManagementSystem
     {
-        private static readonly List<Patient> Patients = Patient.GetSamplePatients();
+        private static readonly Patient?[] Patients;
+
+        static PatientManagementSystem()
+        {
+            Patients = new Patient[25];
+            var samplePatients = Patient.GetSamplePatients();
+            for (int i = 0; i < samplePatients.Length; i++)
+            {
+                Patients[i] = samplePatients[i];
+            }
+            // The rest remain null to be added
+        }
 
         public static bool HandleCliMenu()
         {
@@ -39,7 +50,9 @@
                     WaitAndClear();
                     break;
                 case 5:
-                    FileManagement.PrintPatientInfoToFile(Patients);
+                    FileManagement.PrintPatientInfoToFile(
+                        Patients.Where(p => p != null).Cast<Patient>().ToList()
+                    );
                     WaitAndClear();
                     break;
                 case 6:
@@ -56,18 +69,20 @@
 
         private static void AddPatient()
         {
-            // Get patient details:
+            int index = Array.FindIndex(Patients, p => p == null);
+            if (index == -1)
+            {
+                ConsoleDesign.WriteError("Patient list is full. Cannot add more patients.\n");
+                Console.Write("Press Enter to continue...");
+                Console.ReadLine();
+                return;
+            }
             string fullName = InputValidator.GetValidStringInput("Enter patient's full name");
             int age = InputValidator.GetValidIntInput("Enter patient's age", 0, 120);
             string medCondition = InputValidator.GetValidStringInput(
                 "Enter patient's medical condition"
             );
-
-            // Add patient to the list:
-            var newPatient = new Patient(fullName, age, medCondition);
-            Patients.Add(newPatient);
-
-            // Display success message:
+            Patients[index] = new Patient(fullName, age, medCondition);
             ConsoleDesign.WriteSuccess($"\nPatient '{fullName}' added successfully!\n");
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
@@ -75,43 +90,43 @@
 
         private static void RemovePatient()
         {
-            // Check if there are any patients to remove:
-            if (Patients.Count == 0)
+            int count = Patients.Count(p => p != null);
+            if (count == 0)
             {
                 ConsoleDesign.WriteError("No patients to remove.\n");
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
                 return;
             }
-
-            // Get the patient number to remove (Also act as a check for valid input):
-            int toRemove = InputValidator.GetValidIntInput(
-                $"Enter the number of the patient to remove (1-{Patients.Count})",
-                1,
-                Patients.Count
-            );
-            var removedPatient = Patients[toRemove - 1];
-
-            /*
-                Alternative way to check for patient existence (Without input validation):
-
-                var removedPatient = Patients.ElementAtOrDefault(toRemove - 1);
-
-                if (removedPatient == null)
+            // Display patients with numbers
+            Console.WriteLine("Registered Patients:\n");
+            ConsoleDesign.WriteHeader("================================================");
+            Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
+            ConsoleDesign.WriteHeader("================================================");
+            int shown = 1;
+            int[] map = new int[count];
+            for (int i = 0; i < Patients.Length; i++)
+            {
+                if (Patients[i] != null)
                 {
-                    ConsoleDesign.WriteError("Invalid patient number. Please try again.\n");
-                    return;
+                    Console.WriteLine(
+                        $"{shown, -5}{Patients[i]!.FullName, -25}{Patients[i]!.Age, -5}{Patients[i]!.MedCondition, -20}"
+                    );
+                    map[shown - 1] = i;
+                    shown++;
                 }
-
-                (Reason why it's not used: The input validator already checks for valid input between the first valid 'index' (1) and last one, so this is redundant.)
-             */
-
-            // Remove the patient from the list:
-            Patients.RemoveAt(toRemove - 1);
-
-            // Display success message:
+            }
+            ConsoleDesign.WriteHeader("================================================\n");
+            int toRemove = InputValidator.GetValidIntInput(
+                $"Enter the number of the patient to remove (1-{count})",
+                1,
+                count
+            );
+            int arrayIndex = map[toRemove - 1];
+            var removedPatient = Patients[arrayIndex];
+            Patients[arrayIndex] = null;
             ConsoleDesign.WriteSuccess(
-                $"\nPatient '{removedPatient.FullName}' removed successfully!\n"
+                $"\nPatient '{removedPatient!.FullName}' removed successfully!\n"
             );
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
@@ -119,8 +134,9 @@
 
         private static void SearchPatient()
         {
-            // Check if there are any patients to search:
-            if (Patients.Count == 0)
+            // Check if there are any patients
+            int count = Patients.Count(p => p != null);
+            if (count == 0)
             {
                 ConsoleDesign.WriteError("No patients to search.\n");
                 Console.Write("Press Enter to continue...");
@@ -128,43 +144,45 @@
                 return;
             }
 
-            // Get the search term:
+            // Get search term from user
             string searchTerm = InputValidator.GetValidStringInput(
                 "Enter patient name or part of name to search"
             );
 
-            // Search for patients:
+            // Search for patients matching the search term
             var matches = Patients
-                .Where(p => p.FullName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .Where(p =>
+                    p != null && p.FullName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                )
                 .ToList();
 
-            // Display search results:
+            // Display results
             if (matches.Count == 0)
             {
-                ConsoleDesign.WriteError($"Patient not found.\n");
+                ConsoleDesign.WriteError("Patient not found.\n");
             }
             else
             {
                 Console.WriteLine($"\nFound {matches.Count} patient(s):\n");
-
-                int count = 1;
+                int shown = 1;
                 foreach (var patient in matches)
                 {
                     Console.WriteLine(
-                        $"{count, -5}{patient.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
+                        $"{shown, -5}{patient!.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
                     );
-                    count++;
+                    shown++;
                 }
             }
-
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
         }
 
         private static void DisplayAllPatients()
         {
-            // Check if there are any patients to display:
-            if (Patients.Count == 0)
+
+            // Check if there are any patients
+            int count = Patients.Count(p => p != null);
+            if (count == 0)
             {
                 ConsoleDesign.WriteError("No patient records to display.");
                 Console.WriteLine("Press Enter to continue...");
@@ -172,22 +190,23 @@
                 return;
             }
 
-            int count = 1;
-
-            // Display all patients:
+            // Display all patients
             Console.WriteLine("Registered Patients:\n");
             ConsoleDesign.WriteHeader("================================================");
             Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
             ConsoleDesign.WriteHeader("================================================");
-            foreach (var patient in Patients)
+            int shown = 1;
+            for (int i = 0; i < Patients.Length; i++)
             {
-                Console.WriteLine(
-                    $"{count, -5}{patient.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
-                );
-                count++;
+                if (Patients[i] != null)
+                {
+                    Console.WriteLine(
+                        $"{shown, -5}{Patients[i]!.FullName, -25}{Patients[i]!.Age, -5}{Patients[i]!.MedCondition, -20}"
+                    );
+                    shown++;
+                }
             }
             ConsoleDesign.WriteHeader("================================================\n");
-
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
         }

@@ -4,7 +4,7 @@
     {
         public static void PrintPatientInfoToFile(List<Patient> patients)
         {
-            string filePath = "patient_information.txt";
+            const string filePath = "patient_information.txt";
 
             using (StreamWriter writer = new StreamWriter(filePath, false))
             {

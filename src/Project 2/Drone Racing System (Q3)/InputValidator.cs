@@ -66,14 +66,11 @@ namespace Drone_Racing_System
                     {
                         return result;
                     }
-                    else
-                    {
-                        ConsoleDesign.WriteError(
-                            $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
+                    ConsoleDesign.WriteError(
+                        $"\nError: Please enter a number between {minValue} and {maxValue}. \nPress Enter to try again... "
+                    );
+                    Console.ReadLine();
+                    Console.WriteLine();
                 }
                 catch (Exception ex)
                 {
