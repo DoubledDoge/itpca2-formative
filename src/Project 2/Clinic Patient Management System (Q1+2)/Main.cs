@@ -6,11 +6,14 @@
         {
             Console.Title = "RANDS Clinic Patient Management System";
 
+            // Header
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write(
                 "==================================\n"
-                    + "      RANDS Health Clinic\n"
-                    + "==================================\n\n"
+                + "      RANDS Health Clinic\n"
+                + "==================================\n\n"
             );
+            Console.ResetColor();
 
             bool isRunning;
             Console.WriteLine("Welcome to RANDS Clinic Patient Management System!\n");

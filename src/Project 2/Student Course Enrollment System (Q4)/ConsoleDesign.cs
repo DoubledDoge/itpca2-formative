@@ -1,4 +1,4 @@
-namespace Drone_Racing_System
+namespace Student_Course_Enrollment_System
 {
     public static class ConsoleDesign
     {
@@ -26,13 +26,6 @@ namespace Drone_Racing_System
         public static void WriteHeader(string message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(message);
-            Console.ResetColor();
-        }
-
-        public static void WriteMilestone(string message, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
             Console.Write(message);
             Console.ResetColor();
         }

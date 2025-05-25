@@ -1,6 +1,6 @@
 ﻿namespace Student_Course_Enrollment_System
 {
-    static class Program
+    static class MainClass
     {
         private static void Main()
         {
