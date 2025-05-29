@@ -44,9 +44,9 @@ jobs:
     - name: Check for changes
       run: |
         if (git diff --quiet) {
-          Write-Host "✅ No formatting changes needed"
+          Write-Host "No formatting changes needed"
         } else {
-          Write-Host "📝 Code was formatted - please commit these changes locally"
+          Write-Host "Code was formatted - please commit these changes locally"
           git diff --name-only
         }
 
@@ -84,4 +84,4 @@ jobs:
       run: |
         Write-Host "Building ${{ matrix.solution.name }}..."
         dotnet build "${{ matrix.solution.path }}" --configuration Release --no-restore
-        Write-Host "✅ Build completed"
+        Write-Host "Build completed"
