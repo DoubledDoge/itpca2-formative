@@ -82,6 +82,5 @@ namespace Clinic_Patient_Management_System
                 }
             } while (true);
         }
-
     }
 }

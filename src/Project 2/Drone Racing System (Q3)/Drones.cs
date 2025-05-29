@@ -2,7 +2,6 @@
 {
     public class Drone(int id, string name)
     {
-
         private static readonly Random Random = new Random();
         private static readonly Lock LockObject = new Lock();
         public int Id { get; } = id;
