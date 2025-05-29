@@ -48,35 +48,54 @@ Both projects are built using .NET 9.0 and follow modern C# development practice
 #### Project 2
 -  Clinic Patient Management System
 
-   [▓▓▓▓▓▓▓░░] 80%
+   [▓▓▓▓▓▓▓▓▓] 100%
 
 - Drone Racing System
 
-  [▓░░░░░░░░░] 5%
+  [▓▓▓▓▓▓▓▓▓] 100%
 
 - Student Course Enrollment System
 
-  [▓░░░░░░░░░] 5%
+  [▓▓▓▓▓▓▓▓▓] 100%
 
 ## 🚀 Setup Instructions
 1. Prerequisites:
    - .NET 9.0 SDK
-   - Visual Studio Code or Visual Studio 2022+
+   - Visual Studio 2022+ or Visual Studio Code or Jetbrains Rider
+   - SQL Server (for Bakery Management System)
+   - C# Dev Kit extension/ReSharper (if using VS Code)
 
 2. Clone the repository:
 ```bash
 git clone https://github.com/DoubledDoge/itpca2-formative.git
-```
-
-3. Navigate inside the repository
-
-```bash
 cd itpca2-formative
 ```
 
-4. Open the repository in Visual Studio Code or Visual Studio:
+3. Project Structure:
+   - Project 1 contains:
+     - Hotel Reservation System (Console Application)
+     - Bakery Management System (Windows Forms Application)
+   - Project 2 contains:
+     - Clinic Patient Management System (Console Application)
+     - Drone Racing System (Console Application)
+     - Student Course Enrollment System (Console Application)
 
-Note: When trying to open up the Windows Form Application in Visual Studio in designer view, move the Project 1 folder over to a new folder and open it up there instead.
+4. Opening the Projects:
+   - For Project 1: Open `src/Project 1/Project1Solution.sln`
+   - For Project 2: Open `src/Project 2/Project2Solution.sln`
+
+5. Database Setup (for Bakery Management System):
+   - Open SQL Server Management Studio
+   - Execute the `DatabaseInitialization.sql` script located in the Bakery Management System folder
+   - Optionally, run `ExampleData.sql` to populate with sample data
+
+6. Building and Running:
+   - Build the solutions using Visual Studio or run `dotnet build` in the terminal
+   - Run the desired project from your IDE or use `dotnet run` in the project's directory
+
+### Troubleshooting Notes
+- **Windows Forms Designer**: When working with the Bakery Management System, if you encounter issues with the designer view in Visual Studio, try moving the Project 1 folder to a separate location and open it there.
+- **Database Connection**: Ensure SQL Server is running and the connection string in `DatabaseManager.cs` matches your SQL Server instance for the Bakery Management System.
 
 ## ⭐ Features
 ### Implemented
@@ -84,14 +103,14 @@ Note: When trying to open up the Windows Form Application in Visual Studio in de
 - CI/CD pipeline with GitHub Actions
 - .NET 9.0 configuration
 - Project 1
-- Mostly Clinic Patient Management System
+- Project 2
 
 ## 🗺️ Roadmap
 ### Short-term Goals
-- Complete Drone Racing System
+- Final Refinements and private documentation
 
 ### Long-term Goals
-- Complete Project 2 development
+- Complete! (Header will be removed soon)
 
 ## 🤝 Contributing
 1. Clone the repository
