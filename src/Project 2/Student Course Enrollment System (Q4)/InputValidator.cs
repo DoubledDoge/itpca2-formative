@@ -19,14 +19,6 @@ namespace Student_Course_Enrollment_System
                         Console.ReadLine();
                         Console.WriteLine();
                     }
-                    else if (input.Any(char.IsDigit))
-                    {
-                        ConsoleDesign.WriteError(
-                            "\nError: Input should not contain numbers. \nPress Enter to try again... "
-                        );
-                        Console.ReadLine();
-                        Console.WriteLine();
-                    }
                     else
                     {
                         return input;

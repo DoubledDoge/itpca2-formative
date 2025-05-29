@@ -13,7 +13,7 @@
             lock (ConsoleLock)
             {
                 // Calculate elapsed time since race start
-                var elapsed = DateTime.Now - raceStartTime;
+                TimeSpan elapsed = DateTime.Now - raceStartTime;
 
                 if (milestone == 5)
                 {
@@ -32,7 +32,7 @@
                         2 => ConsoleColor.Cyan,
                         3 => ConsoleColor.Magenta,
                         4 => ConsoleColor.DarkYellow,
-                        _ => ConsoleColor.Gray,
+                        _ => ConsoleColor.Gray, // In case of unexpected milestone
                     };
 
                     // Announce drone progress with timestamp
@@ -61,19 +61,19 @@
             Console.WriteLine("Watch for milestone announcements as drones progress...\n");
 
             // Record race start time
-            raceStartTime = DateTime.Now;
+            lock (ConsoleLock)
+            {
+                raceStartTime = DateTime.Now;
+            }
 
             // Start racing all drones asynchronously
             var racingTasks = drones.Select(drone => Task.Run(() => RaceDrone(drone))).ToArray();
 
             // Update display while racing (much less frequent updates)
-            var displayTask = Task.Run(UpdateRaceStatus);
+            await Task.Run(UpdateRaceStatus);
 
             // Wait for all drones to finish
             await Task.WhenAll(racingTasks);
-
-            // Cancel the display task since all drones are finished
-            // (The display task will exit its loop naturally when all drones are finished)
 
             // Announce results immediately
             AnnounceResults();

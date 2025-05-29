@@ -3,11 +3,11 @@
     public class Drone(int id, string name)
     {
 
-        private static readonly Random random = new Random();
-        private static readonly Lock lockObject = new Lock();
+        private static readonly Random Random = new Random();
+        private static readonly Lock LockObject = new Lock();
         public int Id { get; } = id;
         public string Name { get; } = name;
-        public double DistanceCovered { get; private set; }
+        private double DistanceCovered { get; set; }
         public bool HasFinished { get; private set; }
         public DateTime? FinishTime { get; private set; }
         private int CurrentMilestone { get; set; }
@@ -31,10 +31,10 @@
             if (HasFinished)
                 return;
 
-            lock (lockObject)
+            lock (LockObject)
             {
                 // Simulate drone movement with a random distance between 0.2 and 0.8 km
-                moveDistance = random.NextDouble() * 0.6 + 0.2;
+                moveDistance = Random.NextDouble() * 0.6 + 0.2;
             }
 
             // Update the distance covered
@@ -63,11 +63,6 @@
             // Update the current milestone
             CurrentMilestone = newMilestone;
             RaceManager.OnMilestoneReached(this, newMilestone);
-        }
-
-        public double GetProgressPercentage()
-        {
-            return DistanceCovered / RaceManager.TotalDistance * 100;
         }
     }
 }

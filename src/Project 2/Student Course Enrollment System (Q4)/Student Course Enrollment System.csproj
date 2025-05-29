@@ -2,9 +2,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
-      <ApplicationIcon>drone.ico</ApplicationIcon>
+      <ApplicationIcon>students.ico</ApplicationIcon>
       <RootNamespace>Student_Course_Enrollment_System</RootNamespace>
-      <AssemblyName>BuzzBets Racing System</AssemblyName>
+      <AssemblyName>Student Course Enrollment System</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
