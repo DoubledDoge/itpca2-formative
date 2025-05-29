@@ -1,8 +1,6 @@
 {
     "files.autoSave": "afterDelay",
     "editor.formatOnSave": true,
-    "dotnet.defaultSolution": "src/Project 1/Project1Solution.sln",
-    "csharp.format.enable": true,
     "files.exclude": {
         "**/bin": true,
         "**/obj": true

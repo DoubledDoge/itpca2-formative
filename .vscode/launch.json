@@ -1,36 +1,57 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        },
-        {
-            "name": ".NET Core Launch (web)",
+            "name": "Hotel Reservation System",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/YourProject.dll",
+            "preLaunchTask": "build-project1",
+            "program": "${workspaceFolder}/src/Project 1/Hotel Reservation System (Q1)/bin/Debug/net9.0/Hotel Reservation System.dll",
             "args": [],
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)\\b",
-                "uriFormat": "%s"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views",
-                "/Pages": "${workspaceFolder}/Pages"
-            },
-            "postDebugTask": "cleanup"
+            "cwd": "${workspaceFolder}/src/Project 1/Hotel Reservation System (Q1)",
+            "console": "internalConsole",
+        },
+        {
+            "name": "Bakery Management System",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-project1",
+            "program": "${workspaceFolder}/src/Project 1/Bakery Management System (Q2)/bin/Debug/net9.0-windows/Bakery Management System.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Project 1/Bakery Management System (Q2)",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Clinic Patient Management System",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-project2",
+            "program": "${workspaceFolder}/src/Project 2/Clinic Patient Management System (Q1+2)/bin/Debug/net9.0/Clinic Patient Management System.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Project 2/Clinic Patient Management System (Q1+2)",
+            "console": "internalConsole",
+        },
+        {
+            "name": "Drone Racing System",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-project2",
+            "program": "${workspaceFolder}/src/Project 2/Drone Racing System (Q3)/bin/Debug/net9.0/Drone Racing System.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Project 2/Drone Racing System (Q3)",
+            "console": "internalConsole",
+        },
+        {
+            "name": "Student Course Enrollment System",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-project2",
+            "program": "${workspaceFolder}/src/Project 2/Student Course Enrollment System (Q4)/bin/Debug/net9.0/Student Course Enrollment System.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Project 2/Student Course Enrollment System (Q4)",
+            "console": "internalConsole",
         }
-    ]
+    ],
+    "postDebugTask": "cleanup"
 }
