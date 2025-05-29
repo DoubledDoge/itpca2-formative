@@ -93,13 +93,13 @@ jobs:
           dotnet tool restore
         } else {
           Write-Host "No dotnet-tools.json found, installing csharpier directly..."
-          dotnet tool install csharpier --global
+          dotnet tool install csharpier --global --version 0.29.2
         }
 
     - name: Verify csharpier installation
       run: |
         try {
-          dotnet csharpier --version
+          dotnet dotnet-csharpier --version
           Write-Host "✅ CSharpier is ready"
         } catch {
           Write-Host "⚠️ CSharpier not found, skipping formatting"
@@ -107,11 +107,12 @@ jobs:
         }
 
     - name: Check code formatting
+      if: env.SKIP_FORMATTING != 'true'
       run: |
         Write-Host "Checking code formatting..."
-        dotnet csharpier --check .
+        dotnet dotnet-csharpier --check .
         if ($LASTEXITCODE -ne 0) {
-          Write-Host "❌ Code formatting issues detected. Run 'dotnet csharpier .' locally to fix."
+          Write-Host "❌ Code formatting issues detected. Run 'dotnet dotnet-csharpier .' locally to fix."
           exit 1
         }
         Write-Host "✅ Code formatting is correct"
