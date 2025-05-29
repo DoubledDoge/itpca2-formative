@@ -10,8 +10,8 @@
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write(
                 "==================================\n"
-                + "      RANDS Health Clinic\n"
-                + "==================================\n\n"
+                    + "      RANDS Health Clinic\n"
+                    + "==================================\n\n"
             );
             Console.ResetColor();
 

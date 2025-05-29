@@ -9,16 +9,15 @@ namespace Drone_Racing_System
             // Header
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(
-                "==================================\n" +
-                "     BuzzBets Racing System\n" +
                 "==================================\n"
+                    + "     BuzzBets Racing System\n"
+                    + "==================================\n"
             );
             Console.ResetColor();
 
             var continueRacing = true;
             ConsoleDesign.WriteHeader("Welcome to BuzzBets Drone Racing System!\n");
             Console.WriteLine("Where Velocity Meets Fortune.\n");
-
 
             while (continueRacing)
             {
@@ -28,7 +27,9 @@ namespace Drone_Racing_System
 
                 // Ask user for another race
                 Console.WriteLine("\n" + "=".PadLeft(50, '='));
-                var response = InputValidator.GetValidStringInput("Would you like to race again? (y/n)");
+                var response = InputValidator.GetValidStringInput(
+                    "Would you like to race again? (y/n)"
+                );
 
                 // Determine if user wants another race based on their input
                 continueRacing = response is "y" or "yes" or "Y" or "Yes";

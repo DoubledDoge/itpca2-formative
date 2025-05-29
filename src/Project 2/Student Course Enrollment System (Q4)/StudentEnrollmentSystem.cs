@@ -9,9 +9,9 @@
             ConsoleDesign.WriteHeader("=================== Main Menu ===================\n\n");
             ConsoleDesign.WriteMenu(
                 "  1. Add Student\n"
-                + "  2. Remove Student\n"
-                + "  3. Display all Students\n"
-                + "  0. Exit\n\n"
+                    + "  2. Remove Student\n"
+                    + "  3. Display all Students\n"
+                    + "  0. Exit\n\n"
             );
             ConsoleDesign.WriteHeader("=================================================\n\n");
 
@@ -36,9 +36,7 @@
                     Console.WriteLine("Exiting Student Enrollment System..\n");
                     return false;
                 default:
-                    ConsoleDesign.WriteError(
-                        "Invalid choice. Please try again.\n"
-                    );
+                    ConsoleDesign.WriteError("Invalid choice. Please try again.\n");
                     break;
             }
             return true;
@@ -120,7 +118,7 @@
 
             // Display student details
             Console.WriteLine("Registered Students:\n");
-            Console.WriteLine($"{"No.",-4}{"Name",-30}{"Age",-6}{"Student ID",-10}");
+            Console.WriteLine($"{"No.", -4}{"Name", -30}{"Age", -6}{"Student ID", -10}");
 
             int position = 1;
             var currentNode = Students.First;
@@ -128,11 +126,12 @@
             while (currentNode != null)
             {
                 var student = currentNode.Value;
-                Console.WriteLine($"{position,-4}{student.FullName,-30}{student.Age,-6}{student.StudentId,-10}");
+                Console.WriteLine(
+                    $"{position, -4}{student.FullName, -30}{student.Age, -6}{student.StudentId, -10}"
+                );
                 currentNode = currentNode.Next;
                 position++;
             }
-
         }
 
         // Finds a student by their ID in the linked list of students.

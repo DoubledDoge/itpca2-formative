@@ -20,11 +20,11 @@
             ConsoleDesign.WriteHeader("=================== Main Menu ===================\n\n");
             ConsoleDesign.WriteMenu(
                 "  1. Add Patient\n"
-                + "  2. Remove Patient\n"
-                + "  3. Search Patient\n"
-                + "  4. Display All Patients\n"
-                + "  5. Print Patient Information to File\n"
-                + "  6. Exit\n\n"
+                    + "  2. Remove Patient\n"
+                    + "  3. Search Patient\n"
+                    + "  4. Display All Patients\n"
+                    + "  5. Print Patient Information to File\n"
+                    + "  6. Exit\n\n"
             );
             ConsoleDesign.WriteHeader("=================================================\n\n");
 
@@ -112,13 +112,13 @@
 
             // Display patients with numbers
             Console.WriteLine("Registered Patients:\n");
-            Console.WriteLine($"{"No.",-5}{"Name",-25}{"Age",-5}{"Condition",-20}");
+            Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
             for (int i = 0; i < Patients.Length; i++)
             {
                 if (Patients[i] != null)
                 {
                     Console.WriteLine(
-                        $"{num,-5}{Patients[i]?.FullName,-25}{Patients[i]!.Age,-5}{Patients[i]!.MedCondition,-20}"
+                        $"{num, -5}{Patients[i]?.FullName, -25}{Patients[i]!.Age, -5}{Patients[i]!.MedCondition, -20}"
                     );
                     map[num - 1] = i;
                     num++;
@@ -181,7 +181,7 @@
                 foreach (var patient in matches)
                 {
                     Console.WriteLine(
-                        $"{shown,-5}{patient!.FullName,-25}{patient.Age,-5}{patient.MedCondition,-20}"
+                        $"{shown, -5}{patient!.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
                     );
                     shown++;
                 }
@@ -203,13 +203,13 @@
             }
 
             Console.WriteLine("Registered Patients:\n");
-            Console.WriteLine($"{"No.",-5}{"Name",-25}{"Age",-5}{"Condition",-20}");
+            Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
 
             for (var i = 0; i < activePatients.Count; i++)
             {
                 var patient = activePatients[i];
                 Console.WriteLine(
-                    $"{i + 1,-5}{patient!.FullName,-25}{patient.Age,-5}{patient.MedCondition,-20}"
+                    $"{i + 1, -5}{patient!.FullName, -25}{patient.Age, -5}{patient.MedCondition, -20}"
                 );
             }
 
