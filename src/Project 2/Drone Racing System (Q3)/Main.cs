@@ -2,7 +2,7 @@ namespace Drone_Racing_System
 {
     static class MainClass
     {
-        private static async Task Main()
+        private static Task Main()
         {
             Console.Title = "BuzzBets Drone Racing System";
 
@@ -23,7 +23,7 @@ namespace Drone_Racing_System
             {
                 // Perform the race procedures
                 ShowLoadingAnimation();
-                await RaceManager.StartRace();
+                RaceManager.StartRace();
 
                 // Ask user for another race
                 Console.WriteLine("\n" + "=".PadLeft(50, '='));
@@ -44,6 +44,7 @@ namespace Drone_Racing_System
             Console.WriteLine("\nThank you for using BuzzBets Drone Racing System!");
             Console.Write("Press Enter to exit...");
             Console.ReadLine();
+            return Task.CompletedTask;
         }
 
         private static void ShowLoadingAnimation()

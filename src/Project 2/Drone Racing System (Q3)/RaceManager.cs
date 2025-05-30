@@ -44,7 +44,7 @@
             }
         }
 
-        public static async Task StartRace()
+        public static void StartRace()
         {
             drones = Drone.GetDrones();
 
@@ -54,7 +54,7 @@
             // Countdown (Hype)
             Console.WriteLine("\nRace is about to begin!");
             Console.WriteLine("=".PadLeft(50, '='));
-            await CountdownToStart();
+            CountdownToStart();
 
             // Race begins!
             ConsoleDesign.WriteSuccess("\nRace Started!\n");
@@ -66,14 +66,32 @@
                 raceStartTime = DateTime.Now;
             }
 
-            // Start racing all drones asynchronously
-            var racingTasks = drones.Select(drone => Task.Run(() => RaceDrone(drone))).ToArray();
+            // Start racing all drones on separate threads
+            var raceThreads = new Thread[drones.Length];
+            for (int i = 0; i < drones.Length; i++)
+            {
+                int droneIndex = i; // Capture for closure
+                raceThreads[i] = new Thread(() => RaceDrone(drones[droneIndex]))
+                {
+                    Name = $"DroneRace_{drones[droneIndex].Name}",
+                    IsBackground = false,
+                };
+                raceThreads[i].Start();
+            }
 
-            // Update display while racing (much less frequent updates)
-            await Task.Run(UpdateRaceStatus);
+            // Start status update thread
+            var statusThread = new Thread(UpdateRaceStatus)
+            {
+                Name = "RaceStatusUpdater",
+                IsBackground = true,
+            };
+            statusThread.Start();
 
-            // Wait for all drones to finish
-            await Task.WhenAll(racingTasks);
+            // Wait for all drone threads to complete
+            foreach (var thread in raceThreads)
+            {
+                thread.Join();
+            }
 
             // Announce results immediately
             AnnounceResults();
@@ -98,33 +116,33 @@
             Console.WriteLine("Good luck!");
         }
 
-        private static async Task CountdownToStart()
+        private static void CountdownToStart()
         {
             // Fancy countdown animation
             for (var i = 3; i > 0; i--)
             {
                 ConsoleDesign.WriteHeader($"\nStarting in {i}...\n");
-                await Task.Delay(1000);
+                Thread.Sleep(1000);
             }
         }
 
-        private static async Task RaceDrone(Drone drone)
+        private static void RaceDrone(Drone drone)
         {
-            // When the drone haven't been finished
+            // When the drone hasn't finished
             while (!drone.HasFinished)
             {
                 drone.MoveForward();
                 // Shorter delay between moves (1-2 seconds) for faster racing
-                await Task.Delay(Random.Shared.Next(1000, 2000));
+                Thread.Sleep(Random.Shared.Next(1000, 2000));
             }
         }
 
-        private static async Task UpdateRaceStatus()
+        private static void UpdateRaceStatus()
         {
-            // While the race haven't finished yet
+            // While the race hasn't finished yet
             while (!drones.All(d => d.HasFinished))
             {
-                await Task.Delay(20000); // Check every 20 seconds for cleaner display
+                Thread.Sleep(20000); // Check every 20 seconds for cleaner display
 
                 lock (ConsoleLock)
                 {
