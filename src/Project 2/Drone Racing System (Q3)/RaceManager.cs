@@ -8,6 +8,7 @@
         private static int userBet;
         private static DateTime raceStartTime;
 
+
         public static void OnMilestoneReached(Drone drone, int milestone)
         {
             lock (ConsoleLock)
@@ -66,32 +67,16 @@
                 raceStartTime = DateTime.Now;
             }
 
-            // Start racing all drones on separate threads
-            var raceThreads = new Thread[drones.Length];
-            for (int i = 0; i < drones.Length; i++)
-            {
-                int droneIndex = i; // Capture for closure
-                raceThreads[i] = new Thread(() => RaceDrone(drones[droneIndex]))
-                {
-                    Name = $"DroneRace_{drones[droneIndex].Name}",
-                    IsBackground = false,
-                };
-                raceThreads[i].Start();
-            }
+            // Create tasks for each drone race
+            var raceTasks = drones.Select(drone =>
+                Task.Run(() => RaceDrone(drone))
+            ).ToArray();
 
-            // Start status update thread
-            var statusThread = new Thread(UpdateRaceStatus)
-            {
-                Name = "RaceStatusUpdater",
-                IsBackground = true,
-            };
-            statusThread.Start();
+            // Start status update task
+            Task.Run(UpdateRaceStatus);
 
-            // Wait for all drone threads to complete
-            foreach (var thread in raceThreads)
-            {
-                thread.Join();
-            }
+            // Wait for all drone tasks to complete
+            Task.WaitAll(raceTasks);
 
             // Announce results immediately
             AnnounceResults();
