@@ -8,7 +8,6 @@
         private static int userBet;
         private static DateTime raceStartTime;
 
-
         public static void OnMilestoneReached(Drone drone, int milestone)
         {
             lock (ConsoleLock)
@@ -68,9 +67,7 @@
             }
 
             // Create tasks for each drone race
-            var raceTasks = drones.Select(drone =>
-                Task.Run(() => RaceDrone(drone))
-            ).ToArray();
+            var raceTasks = drones.Select(drone => Task.Run(() => RaceDrone(drone))).ToArray();
 
             // Start status update task
             Task.Run(UpdateRaceStatus);
@@ -117,7 +114,8 @@
             while (!drone.HasFinished)
             {
                 drone.MoveForward();
-                // Shorter delay between moves (1-2 seconds) for faster racing
+
+                // Simulate time taken for each move
                 Thread.Sleep(Random.Shared.Next(1000, 2000));
             }
         }
