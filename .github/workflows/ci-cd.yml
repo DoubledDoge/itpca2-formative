@@ -20,47 +20,9 @@ env:
   DOTNET_NOLOGO: true
 
 jobs:
-  format:
-    name: Format Code
-    runs-on: windows-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      actions: write
-      security-events: write
-
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 9.0.x
-
-    - name: Install CSharpier
-      run: dotnet tool install csharpier --global --version 0.29.2
-
-    - name: Format code
-      run: |
-        Write-Host "Formatting code..."
-        dotnet dotnet-csharpier .
-        Write-Host "Code formatted"
-
-    - name: Check for changes
-      run: |
-        if (git diff --quiet) {
-          Write-Host "No formatting changes needed"
-        } else {
-          Write-Host "Code was formatted - please commit these changes locally"
-          git diff --name-only
-        }
-
   build:
     name: Build
     runs-on: windows-latest
-    needs: format
     permissions:
       contents: read
       pull-requests: write
