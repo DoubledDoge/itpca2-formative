@@ -11,10 +11,7 @@ My two formative projects of C# programming spread across two semesters of my un
 
 ## 📑 Table of Contents
 - [Overview](#-overview)
-- [Project Status](#-project-status)
 - [Setup Instructions](#-setup-instructions)
-- [Features](#-features)
-- [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Notes](#-notes)
@@ -32,31 +29,6 @@ This repository contains two C# projects developed as part of a formative assess
 3. Student Course Enrollment System (Q4)
 
 Both projects are built using .NET 9.0 and follow modern C# development practices.
-
-## 📊 Project Status
-### Completion Progress
-
-#### Project 1
-- Hotel Reservation System
-
-  [▓▓▓▓▓▓▓▓▓] 100%
-
-- Bakery Management System
-
-  [▓▓▓▓▓▓▓▓▓] 100%
-
-#### Project 2
--  Clinic Patient Management System
-
-   [▓▓▓▓▓▓▓▓▓] 100%
-
-- Drone Racing System
-
-  [▓▓▓▓▓▓▓▓▓] 100%
-
-- Student Course Enrollment System
-
-  [▓▓▓▓▓▓▓▓▓] 100%
 
 ## 🚀 Setup Instructions
 1. Prerequisites:
@@ -96,21 +68,6 @@ cd itpca2-formative
 ### Troubleshooting Notes
 - **Windows Forms Designer**: When working with the Bakery Management System, if you encounter issues with the designer view in Visual Studio, try moving the Project 1 folder to a separate location and open it there.
 - **Database Connection**: Ensure SQL Server is running and the connection string in `DatabaseManager.cs` matches your SQL Server instance for the Bakery Management System.
-
-## ⭐ Features
-### Implemented
-- Basic project structure for both projects
-- CI/CD pipeline with GitHub Actions
-- .NET 9.0 configuration
-- Project 1
-- Project 2
-
-## 🗺️ Roadmap
-### Short-term Goals
-- Final Refinements and private documentation
-
-### Long-term Goals
-- Complete! (Header will be removed soon)
 
 ## 🤝 Contributing
 1. Clone the repository
