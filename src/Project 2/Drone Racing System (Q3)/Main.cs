@@ -1,6 +1,6 @@
 namespace Drone_Racing_System
 {
-    static class MainClass
+    internal static class MainClass
     {
         private static Task Main()
         {
@@ -26,7 +26,7 @@ namespace Drone_Racing_System
                 RaceManager.StartRace();
 
                 // Ask user for another race
-                Console.WriteLine("\n" + "=".PadLeft(50, '='));
+                Console.WriteLine("\n" + "==================================");
                 var response = InputValidator.GetValidStringInput(
                     "Would you like to race again? (y/n)"
                 );

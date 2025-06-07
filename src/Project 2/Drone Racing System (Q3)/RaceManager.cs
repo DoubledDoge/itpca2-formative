@@ -53,7 +53,7 @@
 
             // Countdown (Hype)
             Console.WriteLine("\nRace is about to begin!");
-            Console.WriteLine("=".PadLeft(50, '='));
+            Console.WriteLine("==============================");
             CountdownToStart();
 
             // Race begins!
@@ -82,7 +82,7 @@
         private static void GetUserBet()
         {
             Console.WriteLine("\nBetting Time!");
-            Console.WriteLine("=".PadLeft(30, '='));
+            Console.WriteLine("==============================");
 
             // Display a list of drones
             Console.WriteLine("Available drones to bet on:");
@@ -179,7 +179,7 @@
 
             // Check user's bet
             Console.WriteLine("\nBet Result:");
-            Console.WriteLine("-".PadLeft(25, '-'));
+            Console.WriteLine("-----------------");
 
             // Check if user won or not
             if (winner.Id == userBet)
