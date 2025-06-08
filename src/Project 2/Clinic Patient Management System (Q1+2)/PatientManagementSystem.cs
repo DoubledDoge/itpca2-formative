@@ -8,10 +8,7 @@
         {
             Patients = new Patient[25];
             var samplePatients = Patient.GetSamplePatients();
-            for (int i = 0; i < samplePatients.Length; i++)
-            {
-                Patients[i] = samplePatients[i];
-            }
+            Array.Copy(samplePatients, 0, Patients, 0, 10);
             // The rest remain null as to be added by the user
         }
 
@@ -113,6 +110,7 @@
             // Display patients with numbers
             Console.WriteLine("Registered Patients:\n");
             Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
+            Console.WriteLine("--------------------------------------------------");
             for (int i = 0; i < Patients.Length; i++)
             {
                 if (Patients[i] != null)
@@ -204,6 +202,7 @@
 
             Console.WriteLine("Registered Patients:\n");
             Console.WriteLine($"{"No.", -5}{"Name", -25}{"Age", -5}{"Condition", -20}");
+            Console.WriteLine("--------------------------------------------------");
 
             for (var i = 0; i < activePatients.Count; i++)
             {
