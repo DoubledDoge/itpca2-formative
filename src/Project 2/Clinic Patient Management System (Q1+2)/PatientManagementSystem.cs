@@ -192,7 +192,7 @@
         {
             var activePatients = Patients.Where(p => p != null).ToList();
 
-            if (!activePatients.Any())
+            if (activePatients.Count == 0)
             {
                 ConsoleDesign.WriteError("No patient records to display.");
                 Console.WriteLine("Press Enter to continue...");
