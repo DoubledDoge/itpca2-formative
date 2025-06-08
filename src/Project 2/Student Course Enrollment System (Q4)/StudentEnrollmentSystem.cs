@@ -119,6 +119,7 @@
             // Display student details
             Console.WriteLine("Registered Students:\n");
             Console.WriteLine($"{"No.", -4}{"Name", -30}{"Age", -6}{"Student ID", -10}");
+            Console.WriteLine("--------------------------------------------------");
 
             int position = 1;
             var currentNode = Students.First;
